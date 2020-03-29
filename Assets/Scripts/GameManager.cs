@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
    #endregion
    
    public Dictionary<GameObject, Health> healthContainer;
+   public Dictionary<GameObject, Energy> energyContainer;
    public Dictionary<GameObject, Coin> coinContainer;
    public Dictionary<GameObject, BuffReciever> buffRecieverContainer;
    public Dictionary<GameObject, Rigidbody2D> rigidbodyContainer;
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
          isSoundEnabled = Convert.ToBoolean(PlayerPrefs.GetInt("Sound_Enabled"));
       Instance = this;
       healthContainer = new Dictionary<GameObject, Health>();
+      energyContainer = new Dictionary<GameObject, Energy>();
       coinContainer = new Dictionary<GameObject, Coin>();
       buffRecieverContainer = new Dictionary<GameObject, BuffReciever>();
       rigidbodyContainer = new Dictionary<GameObject, Rigidbody2D>();
