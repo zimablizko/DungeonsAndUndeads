@@ -7,19 +7,19 @@ public class CameraController : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private float offsetX;
     [SerializeField] private float offsetY;
-    private Vector3 offset;
-
-
+    [SerializeField] private float smoothTime = 0.15F;
+    private Vector3 velocity = Vector3.zero;
     void Start()
     {
         transform.position =
             new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, 0);
-        offset = transform.position - player.transform.position;
     }
-
-
-    void LateUpdate()
+    void Update()
     {
-        transform.position = player.transform.position + offset;
+        // Define a target position above and behind the target transform
+        Vector3 targetPosition = player.transform.TransformPoint(new Vector3(offsetX, offsetY, 0));
+
+        // Smoothly move the camera towards that target position
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
     }
 }

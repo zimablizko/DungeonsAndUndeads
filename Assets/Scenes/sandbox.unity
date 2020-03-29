@@ -4687,7 +4687,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: d70afad5297693e4a956114689b22077, type: 2}
-  m_InitialState: 0
+  m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -6335,10 +6335,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4490606709288673185, guid: 4585b22d816bd97468808edfdb62dbf3,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490606709288673185, guid: 4585b22d816bd97468808edfdb62dbf3,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490606709288673185, guid: 4585b22d816bd97468808edfdb62dbf3,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4490606709288673190, guid: 4585b22d816bd97468808edfdb62dbf3,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1295114006}
+    - target: {fileID: 4490606709288673190, guid: 4585b22d816bd97468808edfdb62dbf3,
+        type: 3}
+      propertyPath: smoothTime
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490606709288673190, guid: 4585b22d816bd97468808edfdb62dbf3,
+        type: 3}
+      propertyPath: offsetY
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490606710005177767, guid: 4585b22d816bd97468808edfdb62dbf3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490606710005177767, guid: 4585b22d816bd97468808edfdb62dbf3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4490606710005177767, guid: 4585b22d816bd97468808edfdb62dbf3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4585b22d816bd97468808edfdb62dbf3, type: 3}

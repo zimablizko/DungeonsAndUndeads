@@ -12,37 +12,11 @@ public class Player : MonoBehaviour, IObjectDestroyer
 
     #endregion
 
-    [SerializeField] private float speed;
-    public float Speed
-    {
-        get => speed;
-        set => speed = value;
-    }
-    [SerializeField] private float jumpForce;
-   
-    public float Force
-    {
-        get => jumpForce;
-        set => jumpForce = value;
-    }
-    [SerializeField] private float attackSpeed;
-    [SerializeField] private float recoveryTime;
-    [SerializeField] private bool isDisabled;
-    public bool IsDisabled
-    {
-        get => isDisabled;
-        set => isDisabled = value;
-    }
+    [Header("COMPONENTS")]  
     [SerializeField] private Rigidbody2D rigitbody;
-    [SerializeField] private GameObject meleeAttackRegion;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private bool isCheatMode;
-    [SerializeField] private GroundDetection groundDetection;
-    [SerializeField] private Vector3 direction;
     [SerializeField] private Animator animator;
-    [SerializeField] private bool isJumping;
-    [SerializeField] private Fireball fireball;
     [SerializeField] private UICharacterController controller;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Energy energy;
     public Energy Energy
     {
@@ -53,13 +27,46 @@ public class Player : MonoBehaviour, IObjectDestroyer
     {
         get { return health; }
     }
-    [SerializeField] private Transform fireballSpawnPoint;
+    [SerializeField] private GroundDetection groundDetection;
+    [Header("PREFABS")]  
+    [SerializeField] private Fireball fireball;
+    [Header("VARIABLES")]
+    [SerializeField] private int initHP;
+    [SerializeField] private int damage;
+    [SerializeField] private float jumpForce;
+   
+    public float Force
+    {
+        get => jumpForce;
+        set => jumpForce = value;
+    }
+    [SerializeField] private float speed;
+    public float Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private float recoveryTime;
+    [Header("FLAGS")]
+    [SerializeField] private bool isCheatMode;
+    [SerializeField] private bool isDisabled;
+    public bool IsDisabled
+    {
+        get => isDisabled;
+        set => isDisabled = value;
+    }
+    [SerializeField] private bool isJumping;
     [SerializeField] private bool isCooldown;
     [SerializeField] private bool isMovable;
     [SerializeField] private bool isOnRight = true;
+    [Header("OTHER")]
+
+    [SerializeField] private GameObject meleeAttackRegion;
+    [SerializeField] private Vector3 direction;
+    [SerializeField] private Transform fireballSpawnPoint;
     [SerializeField] private int fireballCount = 5;
-    [SerializeField] private int hp;
-    [SerializeField] private int damage;
+    
     private float damageBonus;
     private float jumpForceBonus;
     private float healthBonus;
@@ -89,7 +96,7 @@ public class Player : MonoBehaviour, IObjectDestroyer
         }
         GameManager.Instance.rigidbodyContainer.Add(gameObject, rigitbody);
         buffReciever.OnBuffsChanged += BuffUpdate;
-        health.Init(this,hp+(int)healthBonus);
+        health.Init(this,initHP+(int)healthBonus);
     }
 
     private void BuffUpdate()
@@ -100,7 +107,7 @@ public class Player : MonoBehaviour, IObjectDestroyer
         jumpForceBonus = forceBuff == null ? 0 : forceBuff.additiveBonus;
         healthBonus = healthBuff == null ? 0 : healthBuff.additiveBonus;
         damageBonus = damageBuff == null ? 0 : damageBuff.additiveBonus;
-        health.SetHealth(hp+(int)healthBonus);
+        health.SetHealth(initHP+(int)healthBonus);
     }
 
     void FixedUpdate()
