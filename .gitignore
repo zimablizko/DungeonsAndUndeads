@@ -47,8 +47,4 @@ sysinfo.txt
 \.idea/
 
 Assets/Plugins/Editor/JetBrains/
-*.meta
-*.*.meta
-*.png.meta
-*.cs.meta
-*.cs.meta
+
