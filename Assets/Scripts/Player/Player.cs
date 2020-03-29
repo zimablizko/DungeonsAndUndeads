@@ -48,6 +48,7 @@ public class Player : MonoBehaviour, IObjectDestroyer
     }
     [SerializeField] private float attackSpeed;
     [SerializeField] private float recoveryTime;
+    [SerializeField] private float interactionRange;
     [Header("FLAGS")]
     [SerializeField] private bool isCheatMode;
     [SerializeField] private bool isDisabled;
@@ -60,8 +61,8 @@ public class Player : MonoBehaviour, IObjectDestroyer
     [SerializeField] private bool isCooldown;
     [SerializeField] private bool isMovable;
     [SerializeField] private bool isOnRight = true;
-    [Header("OTHER")]
-
+    [Header("OTHER")] 
+    [SerializeField] private GameObject interactableObject;
     [SerializeField] private GameObject meleeAttackRegion;
     [SerializeField] private Vector3 direction;
     [SerializeField] private Transform fireballSpawnPoint;
@@ -127,7 +128,9 @@ public class Player : MonoBehaviour, IObjectDestroyer
         if (Input.GetButton("AttackMelee"))
             MeleeAttack();
 #endif
+       
     }
+
 
     private void Move()
     {
@@ -292,4 +295,18 @@ public class Player : MonoBehaviour, IObjectDestroyer
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    #region DEBUG
+    /* void OnDrawGizmosSelected()
+ {
+     if (GameManager.Instance.isDebugMode)
+     {
+         Gizmos.color = Color.yellow;
+         Gizmos.DrawSphere(transform.position, interactionRange);
+     }
+ }*/
+    
+
+    #endregion
+
 }

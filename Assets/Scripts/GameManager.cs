@@ -18,10 +18,14 @@ public class GameManager : MonoBehaviour
    public Dictionary<GameObject, Rigidbody2D> rigidbodyContainer;
    public Dictionary<GameObject, ItemComponent> itemContainer;
    public bool isSoundEnabled;
+   public bool isDebugMode;
    public ItemBase itemDataBase;
    public PlayerInventory playerInventory;
+   public Player player;
+   public Checkpoint currentCheckpoint;
    private void Awake()
    {
+      player = FindObjectOfType<Player>();
       if (PlayerPrefs.HasKey("Sound_Enabled"))
          isSoundEnabled = Convert.ToBoolean(PlayerPrefs.GetInt("Sound_Enabled"));
       Instance = this;
@@ -32,6 +36,13 @@ public class GameManager : MonoBehaviour
       rigidbodyContainer = new Dictionary<GameObject, Rigidbody2D>();
       itemContainer = new Dictionary<GameObject, ItemComponent>();
    }
-   
+
+   public void SetCheckpoint(Checkpoint checkpoint)
+   {
+      if(currentCheckpoint != null)
+         currentCheckpoint.DisableCheckpoint();
+      currentCheckpoint = checkpoint;
+      currentCheckpoint.EnableCheckpoint();
+   }
 
 }

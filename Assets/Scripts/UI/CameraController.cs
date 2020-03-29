@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     [SerializeField] private float offsetX;
     [SerializeField] private float offsetY;
     [SerializeField] private float smoothTime = 0.15F;
+    private GameObject player;
     private Vector3 velocity = Vector3.zero;
     void Start()
     {
+        player = GameManager.Instance.player.gameObject;
         transform.position =
             new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, 0);
     }

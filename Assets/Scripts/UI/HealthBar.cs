@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Image health;
-    [SerializeField] private Player player;
     [SerializeField] private float delta;
+    private Player player;
     private float healthValue;
     private float currentHealth;
 
     private void Start()
     {
+        player = GameManager.Instance.player;
         healthValue = player.Health.CurrentHealth / (float)player.Health.MaxHealth;
     }
 
