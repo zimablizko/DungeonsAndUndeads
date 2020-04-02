@@ -15,7 +15,7 @@ public class Player : MonoBehaviour, IObjectDestroyer
     [Header("COMPONENTS")]  
     [SerializeField] private Rigidbody2D rigitbody;
     [SerializeField] private Animator animator;
-    [SerializeField] private UICharacterController controller;
+    [SerializeField] private UICharacterController uiCharacterController;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Energy energy;
     public Energy Energy
@@ -126,7 +126,9 @@ public class Player : MonoBehaviour, IObjectDestroyer
         if (Input.GetButton("AttackRange"))
             CheckShoot();        
         if (Input.GetButton("AttackMelee"))
-            MeleeAttack();
+            MeleeAttack();        
+        if (Input.GetButton("Use"))
+            Interact();
 #endif
        
     }
@@ -150,9 +152,9 @@ public class Player : MonoBehaviour, IObjectDestroyer
 #endif
         if (isMovable)
         {
-            if (controller.Left.IsPressed)
+            if (uiCharacterController.Left.IsPressed)
                 direction = Vector3.left;
-            if (controller.Right.IsPressed)
+            if (uiCharacterController.Right.IsPressed)
                 direction = Vector3.right;
         }
 
@@ -195,9 +197,10 @@ public class Player : MonoBehaviour, IObjectDestroyer
 
     public void InitUIController(UICharacterController uiCharacterController)
     {
-        controller = uiCharacterController;
-        controller.Jump.onClick.AddListener(Jump);
-        controller.Fire.onClick.AddListener(CheckShoot);
+        this.uiCharacterController = uiCharacterController;
+        this.uiCharacterController.Jump.onClick.AddListener(Jump);
+        this.uiCharacterController.Fire.onClick.AddListener(CheckShoot);
+        this.uiCharacterController.Hit.onClick.AddListener(MeleeAttack);
     }
 
     #region MELEE ATTACK
@@ -272,6 +275,21 @@ public class Player : MonoBehaviour, IObjectDestroyer
         fireballTemp.gameObject.SetActive(false);
     }
     #endregion
+
+    #region INTERACTION
+
+    private void Interact()
+    {
+        if (interactableObject)
+        {
+            if (GameManager.Instance.checkpointsContainer.ContainsKey(interactableObject))
+            {
+                GameManager.Instance.SetCheckpoint(GameManager.Instance.checkpointsContainer[interactableObject]);
+            }
+        }
+    }
+
+    #endregion
     
     public void TakeHit()
     {
@@ -293,9 +311,53 @@ public class Player : MonoBehaviour, IObjectDestroyer
 
     public void Destroy(GameObject gameObject)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(ReviveTimeout());
+
     }
 
+    private IEnumerator ReviveTimeout()
+    {
+        yield return new WaitForSeconds(recoveryTime);
+        Revive();
+    }
+    
+    public void Revive()
+    {
+        if (GameManager.Instance.currentCheckpoint)
+        {
+            direction = Vector3.zero;
+            transform.position = GameManager.Instance.currentCheckpoint.transform.position;
+            health.SetFullHealth();
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (GameManager.Instance.interactableObjectsContainer.ContainsKey(col.gameObject))
+        {
+            GameObject obj = GameManager.Instance.interactableObjectsContainer[col.gameObject].gameObject;
+            interactableObject = obj;
+            uiCharacterController.SetLabel(obj.GetComponent<InteractableObject>().label);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (GameManager.Instance.interactableObjectsContainer.ContainsKey(col.gameObject))
+        {
+            ResetInteract();
+        }
+    }
+
+    public void ResetInteract()
+    {
+        interactableObject = null;
+        uiCharacterController.CloseLabel();
+    }
+    
     #region DEBUG
     /* void OnDrawGizmosSelected()
  {

@@ -264,31 +264,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0438eae717d6f054e9fa998992b49d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  jumpForce: 10
-  attackSpeed: 0.5
-  recoveryTime: 0.5
-  isDisabled: 0
   rigitbody: {fileID: 2557588550893069369}
-  meleeAttackRegion: {fileID: 2101989350}
-  spriteRenderer: {fileID: 2557588550893069368}
-  isCheatMode: 1
-  groundDetection: {fileID: 8642664011546922334}
-  direction: {x: 0, y: 0, z: 0}
   animator: {fileID: 6734329519874619905}
-  isJumping: 0
-  fireball: {fileID: 2693843641337227844, guid: ea639461508883843b408eecf08eb865,
-    type: 3}
-  controller: {fileID: 0}
+  uiCharacterController: {fileID: 0}
+  spriteRenderer: {fileID: 2557588550893069368}
   energy: {fileID: 9082428082187647419}
   health: {fileID: 6734329519874619914}
-  fireballSpawnPoint: {fileID: 2845009631570285656}
+  groundDetection: {fileID: 8642664011546922334}
+  fireball: {fileID: 2693843641337227844, guid: ea639461508883843b408eecf08eb865,
+    type: 3}
+  initHP: 100
+  damage: 10
+  jumpForce: 10
+  speed: 4
+  attackSpeed: 0.5
+  recoveryTime: 0.5
+  interactionRange: 1.5
+  isCheatMode: 1
+  isDisabled: 0
+  isJumping: 1
   isCooldown: 0
   isMovable: 1
   isOnRight: 1
+  interactableObject: {fileID: 0}
+  meleeAttackRegion: {fileID: 2101989350}
+  direction: {x: 0, y: 0, z: 0}
+  fireballSpawnPoint: {fileID: 2845009631570285656}
   fireballCount: 5
-  hp: 100
-  damage: 10
   buffReciever: {fileID: 3871963988194823960}
 --- !u!114 &6734329519874619914
 MonoBehaviour:

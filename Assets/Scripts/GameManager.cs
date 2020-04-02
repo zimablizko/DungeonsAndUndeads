@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
    public Dictionary<GameObject, BuffReciever> buffRecieverContainer;
    public Dictionary<GameObject, Rigidbody2D> rigidbodyContainer;
    public Dictionary<GameObject, ItemComponent> itemContainer;
+   public Dictionary<GameObject, InteractableObject> interactableObjectsContainer;
+   public Dictionary<GameObject, Checkpoint> checkpointsContainer;
    public bool isSoundEnabled;
    public bool isDebugMode;
    public ItemBase itemDataBase;
@@ -35,14 +37,26 @@ public class GameManager : MonoBehaviour
       buffRecieverContainer = new Dictionary<GameObject, BuffReciever>();
       rigidbodyContainer = new Dictionary<GameObject, Rigidbody2D>();
       itemContainer = new Dictionary<GameObject, ItemComponent>();
+      interactableObjectsContainer = new Dictionary<GameObject, InteractableObject>();
+      checkpointsContainer = new Dictionary<GameObject, Checkpoint>();
    }
 
+   /**
+    * Выключаем старый чекпоинт и добавляем его в интерактивные объекты
+    * С новым наоборот
+    */
    public void SetCheckpoint(Checkpoint checkpoint)
    {
-      if(currentCheckpoint != null)
+      if (currentCheckpoint != null)
+      {
+         interactableObjectsContainer.Add(currentCheckpoint.gameObject,
+            currentCheckpoint.GetComponent<InteractableObject>());
          currentCheckpoint.DisableCheckpoint();
+      }
       currentCheckpoint = checkpoint;
       currentCheckpoint.EnableCheckpoint();
+      interactableObjectsContainer.Remove(currentCheckpoint.gameObject);
+      player.ResetInteract();
    }
 
 }

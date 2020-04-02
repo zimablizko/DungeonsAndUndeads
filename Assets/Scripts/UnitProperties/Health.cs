@@ -58,5 +58,10 @@ public class Health : MonoBehaviour
     {
         maxHealth = bonusHealth;
         health = bonusHealth;
+    }    
+    
+    public void SetFullHealth()
+    {
+        health = maxHealth;
     }
 }

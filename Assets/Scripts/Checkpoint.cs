@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,11 @@ public class Checkpoint : MonoBehaviour
     void Awake()
     {
         animator = gameObject.GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.checkpointsContainer.Add(gameObject,this);
     }
 
     // Update is called once per frame

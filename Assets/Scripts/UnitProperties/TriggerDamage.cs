@@ -37,7 +37,4 @@ public class TriggerDamage : MonoBehaviour
     }
 }
 
-public interface IObjectDestroyer
-{
-    void Destroy(GameObject gameObject);
-}
+
