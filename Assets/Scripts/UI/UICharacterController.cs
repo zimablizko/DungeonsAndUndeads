@@ -1,19 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UICharacterController : MonoBehaviour
 {
-    [Header("SCREEN BUTTONS")]  
-    [SerializeField] private PressedButton left;
+    [Header("SCREEN BUTTONS")] [SerializeField]
+    private PressedButton left;
+
     [SerializeField] private PressedButton right;
     [SerializeField] private Button jump;
     [SerializeField] private Button fire;
     [SerializeField] private Button hit;
-    
-    [Header("TEXT ON SCREEN")]  
-    [SerializeField] private Text infoLabelText;
+
+    [Header("TEXT ON SCREEN")] [SerializeField]
+    private Text infoLabelText;
 
     public PressedButton Left => left;
     public PressedButton Right => right;
@@ -26,6 +28,11 @@ public class UICharacterController : MonoBehaviour
         Player.Instance.InitUIController(this);
     }
 
+    private void FixedUpdate()
+    {
+        MovementInputUpdate();
+    }
+
     public void SetLabel(string label)
     {
         infoLabelText.text = "[E] " + label;
@@ -35,5 +42,24 @@ public class UICharacterController : MonoBehaviour
     public void CloseLabel()
     {
         infoLabelText.gameObject.SetActive(false);
+    }
+
+    private void MovementInputUpdate()
+    {
+        if (Player.Instance.IsDisabled) return;
+        Player.Instance.Stop();
+#if UNITY_EDITOR
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") < 0)
+        {
+            Player.Instance.MovementUpdate(Vector3.left);
+        }
+
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
+            Player.Instance.MovementUpdate(Vector3.right);
+#endif
+        if (Left.IsPressed)
+            Player.Instance.MovementUpdate(Vector3.left);
+        if (Right.IsPressed)
+            Player.Instance.MovementUpdate(Vector3.right);
     }
 }

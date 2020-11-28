@@ -49,3 +49,4 @@ MonoBehaviour:
   playerInventory: {fileID: 0}
   player: {fileID: 0}
   currentCheckpoint: {fileID: 0}
+  canvas: {fileID: 0}
