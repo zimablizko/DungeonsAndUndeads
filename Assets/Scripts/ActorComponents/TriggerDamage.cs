@@ -26,9 +26,7 @@ public class TriggerDamage : MonoBehaviour
         {
             var actor = GameManager.Instance.actorsContainer[col.gameObject];
            
-            actor.TakeHit();
-            actor.Health.TakeHit(damage);
-            GFXManager.Instance.CreateFloatingText(actor.transform, damage.ToString());
+            actor.TakeHit(damage);
         }
 
         if (destroySelfAfterCollision)

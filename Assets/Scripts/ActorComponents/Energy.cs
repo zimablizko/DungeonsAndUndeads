@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ public class Energy : MonoBehaviour
     
     public void AddEnergy(int bonusEnergy)
     {
-        energy += bonusEnergy;
+        energy = Math.Max(energy + bonusEnergy, 0);
         if (energy > maxEnergy)
         {
             energy = maxEnergy;

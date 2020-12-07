@@ -9,10 +9,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     
     [Header("COMPONENTS")] 
     [SerializeField] public Rigidbody2D rigidbody;
-    
     [SerializeField] public Animator animator;
-
-
     [SerializeField] private Health health;
 
     public Health Health
@@ -21,12 +18,9 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     }
 
     [SerializeField] private GroundDetection groundDetection;
-    [Header("PREFABS")] 
-    [SerializeField] private Projectile projectile;
+
     [Header("VARIABLES")] 
-    [SerializeField] private int initHp = 100;
-    [SerializeField] private int damage = 5;
-    [SerializeField] private float attackRange = 0.5f;
+    [SerializeField] private int initHealth = 100;
     [SerializeField] private float jumpForce = 10;
 
     public float Force
@@ -34,7 +28,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         get => jumpForce;
         set => jumpForce = value;
     }
-
+    [SerializeField] private float actionSpeed = 0.5f;
     [SerializeField] private float speed = 3;
 
     public float Speed
@@ -42,10 +36,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         get => speed;
         set => speed = value;
     }
-
-    [SerializeField] private float actionSpeed = 0.5f;
-    [SerializeField] private float attackSpeed = 2f;
-    private float nextAttackTime = 0f;
+    
     [SerializeField] private float recoveryTime = 0.5f;
     [Header("FLAGS")]
     [SerializeField] private bool isDisabled;
@@ -60,27 +51,49 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     [SerializeField] private bool isCooldown;
     [SerializeField] private bool isMovable = true;
     [SerializeField] public bool isOnRight = true;
-    [Header("OTHER")]
+    
+    [Header("MELEE COMBAT")]
+    [SerializeField] private int meleeDamage = 5;
+    [SerializeField] private float meleeAttackRate = 2f;
+    [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private Transform attackPoint;
+    private float nextMeleeAttackTime;
+    private float meleeDamageBonus;
+    private float meleeDamageMultiplier;
+    public int MeleeDamage
+    {
+        get => (int)((meleeDamage + (int) meleeDamageBonus) * (1 + meleeDamageMultiplier));
+        set => meleeDamage = value;
+    }
+    
+    [Header("RANGE COMBAT")]
+    [SerializeField] private int rangeDamage = 5;
+    [SerializeField] private float rangeAttackRate = 2f;
+    [SerializeField] private Projectile projectile;
+    private float nextRangeAttackTime;
+    private float rangeDamageBonus;
+    private float rangeDamageMultiplier;
+    [SerializeField] private Transform projectileSpawnPoint;
+    private int projectileCount = 5;
+    private Projectile currentProjectile;
+    private List<Projectile> projectilePool;
+    public int RangeDamage
+    {
+        get => (int)((rangeDamage + (int) rangeDamageBonus) * (1 + rangeDamageMultiplier));
+        set => rangeDamage = value;
+    }
+    
+    [Header("OTHER")]
+    
     [SerializeField] private LayerMask enemyLayers;
     
     private Vector3 direction;
-    [SerializeField] private Transform projectileSpawnPoint;
-    private int projectileCount = 5;
-
-    private float damageBonus;
+    
     private float jumpForceBonus;
     private float healthBonus;
+    
+    public BuffReceiver buffReceiver;
 
-    public int Damage
-    {
-        get => damage + (int) damageBonus;
-        set => damage = value;
-    }
-
-    public BuffReciever buffReciever;
-    private Projectile currentProjectile;
-    private List<Projectile> projectilePool;
 
     public void Start()
     {
@@ -96,8 +109,8 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         }
 
         GameManager.Instance.rigidbodyContainer.Add(gameObject, rigidbody);
-        buffReciever.OnBuffsChanged += BuffUpdate;
-        health.Init(this, initHp + (int) healthBonus);
+        buffReceiver.OnBuffsChanged += BuffUpdate;
+        health.Init(this, initHealth + (int) healthBonus);
         ActorInit();
     }
 
@@ -113,13 +126,24 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
     private void BuffUpdate()
     {
-        Buff forceBuff = buffReciever.Buffs.Find(buff => buff.type == BuffType.Force);
-        Buff healthBuff = buffReciever.Buffs.Find(buff => buff.type == BuffType.Armor);
-        Buff damageBuff = buffReciever.Buffs.Find(buff => buff.type == BuffType.Damage);
-        jumpForceBonus = forceBuff == null ? 0 : forceBuff.additiveBonus;
-        healthBonus = healthBuff == null ? 0 : healthBuff.additiveBonus;
-        damageBonus = damageBuff == null ? 0 : damageBuff.additiveBonus;
-        health.SetHealth(initHp + (int) healthBonus);
+        // Melee Damage
+        foreach (var buff in buffReceiver.Buffs.FindAll(buff => buff.type == BuffType.MeleeDamage))
+        {
+            meleeDamageBonus += buff.additiveBonus != 0 ? buff.additiveBonus : 0;
+            meleeDamageMultiplier += buff.multipleBonus != 0 ? buff.multipleBonus : 0;
+        }
+        // Range Damage
+        foreach (var buff in buffReceiver.Buffs.FindAll(buff => buff.type == BuffType.RangeDamage))
+        {
+            rangeDamageBonus += buff.additiveBonus != 0 ? buff.additiveBonus : 0;
+            rangeDamageMultiplier += buff.multipleBonus != 0 ? buff.multipleBonus : 0;
+        }
+        // Health
+        foreach (var buff in buffReceiver.Buffs.FindAll(buff => buff.type == BuffType.Health))
+        {
+            healthBonus += buff.additiveBonus != 0 ? buff.additiveBonus : 0;
+        }
+        health.SetHealth(initHealth + (int) healthBonus);
     }
 
     void FixedUpdate()
@@ -191,12 +215,11 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
     public void MeleeAttack()
     {
-        if (Time.time >= nextAttackTime && !isJumping)
+        if (Time.time >= nextMeleeAttackTime && !isJumping)
         {
             isMovable = false;
             animator.SetTrigger("StartAttackMelee");
-            nextAttackTime = Time.time + 1f / attackSpeed;
-            //StartCoroutine(StartCooldown());
+            nextMeleeAttackTime = Time.time + 1f / meleeAttackRate;
         }
     }
 
@@ -207,13 +230,10 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("HIT "+ enemy.name);
             if (GameManager.Instance.actorsContainer.ContainsKey(enemy.gameObject))
             {
                 var actor = GameManager.Instance.actorsContainer[enemy.gameObject];
-                actor.Health.TakeHit(damage);
-                GFXManager.Instance.CreateFloatingText(actor.transform, damage.ToString());
-                actor.TakeHit(); //TODO: Переделать эту херню
+                actor.TakeHit(MeleeDamage);
             }
         }
     }
@@ -230,18 +250,18 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
     public void CheckShoot()
     {
-        if (!isCooldown)
+        if (Time.time >= nextRangeAttackTime && !isJumping)
         {
             isMovable = false;
             animator.SetTrigger("StartAttackRange");
-            
+            nextRangeAttackTime = Time.time + 1f / rangeAttackRate;
         }
     }
 
     void Shoot()
     {
         currentProjectile = GetProjectileFromPool();
-        currentProjectile.SetImpulse(isOnRight ? Vector2.right : Vector2.left, this, (int) (damage + damageBonus));
+        currentProjectile.SetImpulse(isOnRight ? Vector2.right : Vector2.left, this, RangeDamage);
         StartCoroutine(StartCooldown());
         isMovable = true;
     }
@@ -279,16 +299,17 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
     #endregion
     
-    public void TakeHit()
+    public void TakeHit(int hitDamage)
     {
+        Health.TakeHit(hitDamage);
+        GFXManager.Instance.CreateFloatingText(transform, hitDamage.ToString());
         IsDisabled = true;
         if (health.CurrentHealth > 0f)
         {
             animator.SetTrigger("TakeDamage");
             StartCoroutine(RecoverTimeout());
-        }else{
+        } else{
             Destroy(gameObject);
-            
         }
     }
 

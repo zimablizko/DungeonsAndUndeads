@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "New Item Database",menuName = "Database/Items")]
-public class ItemBase : ScriptableObject
+public class ItemDataBase : ScriptableObject
 {
     // Start is called before the first frame update
     [SerializeField, HideInInspector] private List<Item> items;
@@ -53,52 +54,14 @@ public class ItemBase : ScriptableObject
     public Item GetItemOfID(int id)
     {
         return items.Find(item => item.Id == id);
-    }
-}
-
-[Serializable]
-public class Item
-{
-    [SerializeField] private int id;
-    [SerializeField] private string itemName;
-    [SerializeField] private string description;
-    [SerializeField] private BuffType buffType;
-    [SerializeField] private float value;
-    [SerializeField] private Sprite sprite;
-
-    public Sprite Sprite
+    }    
+    
+    public Item GetRandomItem()
     {
-        get => sprite;
-        set => sprite = value;
+        Debug.Log(items.Count);
+        var itemId = Random.Range(1, (items.Count + 1));
+        Debug.Log(itemId);
+        return GetItemOfID(itemId);
     }
-
-    public int Id
-    {
-        get => id;
-        set => id = value;
-    }
-
-    public string ItemName
-    {
-        get => itemName;
-        set => itemName = value;
-    }
-
-    public string Description
-    {
-        get => description;
-        set => description = value;
-    } 
-
-    public BuffType BuffType
-    {
-        get => buffType;
-        set => buffType = value;
-    }
-
-    public float Value
-    {
-        get => value;
-        set => this.value = value;
-    }
+    
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuffReciever : MonoBehaviour
+public class BuffReceiver : MonoBehaviour
 {
     // Start is called before the first frame update
     private List<Buff> buffs;
@@ -18,7 +18,7 @@ public class BuffReciever : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.buffRecieverContainer.Add(gameObject,this);
+        GameManager.Instance.buffReceiverContainer.Add(gameObject,this);
         buffs = new List<Buff>();
     }
 
@@ -28,8 +28,7 @@ public class BuffReciever : MonoBehaviour
         {
             buffs.Add(buff);
         }
-        if (OnBuffsChanged != null)
-            OnBuffsChanged();
+        OnBuffsChanged?.Invoke();
     }    
     
     public void RemoveBuff(Buff buff)
@@ -38,7 +37,6 @@ public class BuffReciever : MonoBehaviour
         {
             buffs.Remove(buff);
         }
-        if (OnBuffsChanged != null)
-            OnBuffsChanged();
+        OnBuffsChanged?.Invoke();
     }
 }

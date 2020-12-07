@@ -10,31 +10,19 @@ public class BuffEmitter : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (GameManager.Instance.buffRecieverContainer.ContainsKey(other.gameObject))
+        if (GameManager.Instance.buffReceiverContainer.ContainsKey(other.gameObject))
         {
-            var reciever = GameManager.Instance.buffRecieverContainer[other.gameObject];
+            var reciever = GameManager.Instance.buffReceiverContainer[other.gameObject];
             reciever.AddBuff(buff);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (GameManager.Instance.buffRecieverContainer.ContainsKey(other.gameObject))
+        if (GameManager.Instance.buffReceiverContainer.ContainsKey(other.gameObject))
         {
-            var reciever = GameManager.Instance.buffRecieverContainer[other.gameObject];
+            var reciever = GameManager.Instance.buffReceiverContainer[other.gameObject];
             reciever.RemoveBuff(buff);
         }
     }
-}
-[Serializable]
-public class Buff
-{
-    public BuffType type;
-    public float additiveBonus;
-    public float multipleBonus;
-}
-
-public enum BuffType
-{
-    Damage, Force, Armor
 }

@@ -31,10 +31,8 @@ public class CollisionDamage : MonoBehaviour
                 {
                     if (health != null && !isCooldown)
                     {
-                        health.TakeHit(damage);
-                       
                         var force = transform.position - col.transform.position;
-                        Player.Instance.TakeHit();
+                        Player.Instance.TakeHit(damage);
                         force.Normalize ();
                         force.y = Mathf.Abs(force.y);
                         force.x *= -0.75f;

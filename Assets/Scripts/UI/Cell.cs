@@ -11,11 +11,13 @@ public class Cell : MonoBehaviour
     public void Init(Item item)
     {
         this.item = item;
+        icon.color = new Color(1,1,1,1);
         icon.sprite = item.Sprite;
     }
     
     public void ClearCell()
     {
+        icon.color = new Color(1,1,1,0);
         item = null;
         icon.sprite = null;
     }
@@ -26,7 +28,7 @@ public class Cell : MonoBehaviour
 
     public void OnClickCell()
     {
-        if (item == null)
+        /*if (item == null)
             return;
         GameManager.Instance.playerInventory.Items.Remove(item);
         Buff buff = new Buff()
@@ -34,6 +36,7 @@ public class Cell : MonoBehaviour
             type = item.BuffType,
             additiveBonus = item.Value
         };
-        GameManager.Instance.playerInventory.buffReciever.AddBuff(buff);
+        GameManager.Instance.playerInventory.buffReciever.AddBuff(buff);*/
+        //TODO: ???
     }
 }

@@ -14,7 +14,6 @@ public class Player : Actor
 
     [Header("PLAYER COMPONENTS")] 
     private UICharacterController uiCharacterController;
-
     [SerializeField] private Energy energy;
 
     public Energy Energy
@@ -41,83 +40,15 @@ public class Player : Actor
 #if UNITY_EDITOR
         if (Input.GetButtonDown("Jump"))
             Jump();
-        if (Input.GetButton("AttackRange"))
+        if (Input.GetButtonDown("AttackRange"))
             CheckShoot();
-        if (Input.GetButton("AttackMelee"))
+        if (Input.GetButtonDown("AttackMelee"))
             MeleeAttack();
         if (Input.GetButtonDown("Use"))
             Interact();
 #endif
     }
-
-   
-
-
-    /*
-    private void Move()
-    {
-        animator.SetBool("isGrounded", groundDetection.IsGrounded);
-        if (!isJumping && !groundDetection.IsGrounded)
-            animator.SetTrigger("StartFall");
-        isJumping = /*isJumping &&#1# !groundDetection.IsGrounded;
-        direction = Vector3.zero;
-#if UNITY_EDITOR
-        if (isMovable)
-        {
-            if (Input.GetKey(KeyCode.LeftArrow)  || Input.GetAxis("Horizontal") < 0)
-                direction = Vector3.left;
-            if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
-                direction = Vector3.right;
-        }
-#endif
-        if (isMovable)
-        {
-            if (uiCharacterController.Left.IsPressed)
-                direction = Vector3.left;
-            if (uiCharacterController.Right.IsPressed)
-                direction = Vector3.right;
-        }
-
-        direction *= speed;
-        direction.y = rigitbody.velocity.y;
-        if (!isDisabled)
-            rigitbody.velocity = direction;
-        if (direction.x > 0)
-        {
-            isOnRight = true;
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-
-        //spriteRenderer.flipX = false;
-        if (direction.x < 0)
-        {
-            isOnRight = false;
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-    }
-  /* private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (rigitbody.velocity.y > 0 && !isJumping)
-        {
-            direction.y = 0;
-            rigitbody.velocity = direction;
-        }
-    }#1#
-
-    private void Jump()
-    {
-        if (!isCooldown && groundDetection.IsGrounded)
-        {
-            rigitbody.AddForce(Vector2.up * (jumpForce+jumpForceBonus), ForceMode2D.Impulse);
-            animator.SetTrigger("StartJump");
-            isMovable = true;
-            isJumping = true;
-            StartCoroutine(StartCooldown());
-        }
-    }
-    */
-    //TODO: у Player checkShoot с учётом энергии
-
+    
     public void InitUIController(UICharacterController uiCharacterController)
     {
         this.uiCharacterController = uiCharacterController;
@@ -126,6 +57,19 @@ public class Player : Actor
         this.uiCharacterController.Hit.onClick.AddListener(MeleeAttack);
     }
 
+    public void CheckShoot()
+    {
+        if (Energy.CurrentEnergy >= 5)
+        {
+            base.CheckShoot();
+        }
+    }
+    
+    //висит на финальном фрейме дальней атаки
+    public void SpendEnergy()
+    {
+        Energy.AddEnergy(-5);
+    }
 
     #region INTERACTION
 
@@ -133,6 +77,7 @@ public class Player : Actor
     {
         if (interactableObject)
         {
+            Debug.Log("Interact with "+interactableObject.name);
             if (GameManager.Instance.checkpointsContainer.ContainsKey(interactableObject))
             {
                 GameManager.Instance.SetCheckpoint(GameManager.Instance.checkpointsContainer[interactableObject]);
@@ -141,7 +86,14 @@ public class Player : Actor
             if (interactableObject.GetComponent<SceneChanger>())
             {
                 RoomManager.Instance.ChangeScene();
+            }            
+            if (interactableObject.GetComponent<ItemComponent>())
+            {
+                GameManager.Instance.playerInventory.AddItem(interactableObject.GetComponent<ItemComponent>().Item);
+                GameObject.Destroy(interactableObject);
             }
+
+            ResetInteract();
         }
     }
 

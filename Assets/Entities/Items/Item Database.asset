@@ -14,31 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - id: 1
-    itemName: "\u0417\u0435\u043B\u044C\u0435 \u0441\u0438\u043B\u044B"
-    description: 
-    buffType: 1
-    value: 5
-    sprite: {fileID: -3065595510956808684, guid: 27c79f99c6d0669438a51be49ece6275,
-      type: 3}
+    itemName: Diamond Sword
+    description: +10 Atack Damage
+    buffList:
+    - type: 0
+      additiveBonus: 10
+      multipleBonus: 0
+    itemType: 1
+    sprite: {fileID: 319968439374914050, guid: b21ff76c92a7c6341aa4affabd2e7d01, type: 3}
   - id: 2
-    itemName: "\u0417\u0435\u043B\u044C\u0435 \u0437\u0430\u0449\u0438\u0442\u044B"
-    description: 
-    buffType: 2
-    value: 5
-    sprite: {fileID: 6997616985800771554, guid: 27c79f99c6d0669438a51be49ece6275,
-      type: 3}
-  - id: 3
-    itemName: "\u0417\u0435\u043B\u044C\u0435 \u0443\u0440\u043E\u043D\u0430"
-    description: 
-    buffType: 0
-    value: 5
-    sprite: {fileID: 1185527514606905908, guid: 27c79f99c6d0669438a51be49ece6275,
+    itemName: Carrot
+    description: +20 HP
+    buffList:
+    - type: 2
+      additiveBonus: 20
+      multipleBonus: 0
+    itemType: 1
+    sprite: {fileID: 2675871245208072475, guid: b0ffdb5edceaf1b43a3fd7b98e0ee726,
       type: 3}
   currentItem:
-    id: 1
-    itemName: "\u0417\u0435\u043B\u044C\u0435 \u0441\u0438\u043B\u044B"
-    description: 
-    buffType: 1
-    value: 5
-    sprite: {fileID: -3065595510956808684, guid: 27c79f99c6d0669438a51be49ece6275,
+    id: 2
+    itemName: Carrot
+    description: +20 HP
+    buffList:
+    - type: 2
+      additiveBonus: 20
+      multipleBonus: 0
+    itemType: 1
+    sprite: {fileID: 2675871245208072475, guid: b0ffdb5edceaf1b43a3fd7b98e0ee726,
       type: 3}

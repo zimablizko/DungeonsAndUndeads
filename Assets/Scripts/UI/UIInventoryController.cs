@@ -10,31 +10,29 @@ public class UIInventoryController : MonoBehaviour
     [SerializeField] private Cell cellPrefab;
     [SerializeField] private Transform rootParent;
 
-    private void Init()
+    public void Init()
     {
 
         cells = new Cell[cellCount];
         for (int i = 0; i < cellCount; i++)
         {
             cells[i] = Instantiate(cellPrefab, rootParent);
+            cells[i].ClearCell();
         }
-        
-        Player.Instance.buffReciever.OnBuffsChanged += InventoryRefresh;
+        GameManager.Instance.playerInventory.OnItemlistChanged += InventoryRefresh;
         //cellPrefab.gameObject.SetActive(false);
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         if (cells == null || cells.Length <= 0)
             Init();
         InventoryRefresh();
-    }
+    }*/
 
     private void InventoryRefresh()
     {
-        Debug.Log("Refrsh");
         var inventory =  GameManager.Instance.playerInventory;
-        Debug.Log(inventory.Items.Count);
         for (int i = 0; i < cellCount; i++)
         {
             cells[i].ClearCell();

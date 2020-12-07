@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<GameObject, Health> healthContainer;
     public Dictionary<GameObject, Energy> energyContainer;
     public Dictionary<GameObject, Coin> coinContainer;
-    public Dictionary<GameObject, BuffReciever> buffRecieverContainer;
+    public Dictionary<GameObject, BuffReceiver> buffReceiverContainer;
     public Dictionary<GameObject, Rigidbody2D> rigidbodyContainer;
     public Dictionary<GameObject, ItemComponent> itemContainer;
     public Dictionary<GameObject, InteractableObject> interactableObjectsContainer;
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public Dictionary<GameObject, Actor> actorsContainer;
     public bool isSoundEnabled;
     public bool isDebugMode;
-    public ItemBase itemDataBase;
+    public ItemDataBase itemDataDataBase;
     public PlayerInventory playerInventory;
     public Player player;
     public Checkpoint currentCheckpoint;
@@ -32,19 +32,19 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        player = FindObjectOfType<Player>();
         canvas = GameObject.Find("Canvas");
         if (PlayerPrefs.HasKey("Sound_Enabled"))
             isSoundEnabled = Convert.ToBoolean(PlayerPrefs.GetInt("Sound_Enabled"));
         healthContainer = new Dictionary<GameObject, Health>();
         energyContainer = new Dictionary<GameObject, Energy>();
         coinContainer = new Dictionary<GameObject, Coin>();
-        buffRecieverContainer = new Dictionary<GameObject, BuffReciever>();
+        buffReceiverContainer = new Dictionary<GameObject, BuffReceiver>();
         rigidbodyContainer = new Dictionary<GameObject, Rigidbody2D>();
         itemContainer = new Dictionary<GameObject, ItemComponent>();
         interactableObjectsContainer = new Dictionary<GameObject, InteractableObject>();
         checkpointsContainer = new Dictionary<GameObject, Checkpoint>();
         actorsContainer = new Dictionary<GameObject, Actor>();
+        canvas.transform.Find("Inventory").Find("ItemGrid").GetComponent<UIInventoryController>().Init(); //TODO: плохой поиск
     }
 
     public void Start()
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator TestStartGame()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         RoomManager.Instance.LoadFirstScene();
     }
 }

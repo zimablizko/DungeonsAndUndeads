@@ -15,13 +15,12 @@ public class RoomManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        player = FindObjectOfType<Player>();
+        player = Player.Instance;
         canvas = GameObject.Find("Canvas");
         
         gameWorld = new GameWorld();
     }
-
-    // Start is called before the first frame update
+    
     public void ChangeScene()
     {
         canvas.GetComponent<FadeScreen>().FadeIn();
@@ -50,7 +49,6 @@ public class RoomManager : MonoBehaviour
         AsyncOperation loadingOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         while (!loadingOperation.isDone)
         {
-            Debug.Log(loadingOperation.progress);
             yield return null;
         }
         player.gameObject.SetActive(true);

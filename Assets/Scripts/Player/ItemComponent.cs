@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemComponent : MonoBehaviour, IObjectDestroyer
 {
-    [SerializeField] private ItemType itemType;
+    [SerializeField] private int itemId;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Item item;
 
@@ -17,20 +17,27 @@ public class ItemComponent : MonoBehaviour, IObjectDestroyer
     // Start is called before the first frame update
     void Start()
     {
-        item = GameManager.Instance.itemDataBase.GetItemOfID((int) itemType);
+        if (itemId > 0)
+            UpdateItemById(itemId);
+    }
+
+    public void UpdateItemById(int itemId)
+    {
+        Debug.Log("UpdateItemById");
+        item = GameManager.Instance.itemDataDataBase.GetItemOfID(itemId);
         spriteRenderer.sprite = item.Sprite;
-        GameManager.Instance.itemContainer.Add(gameObject, this);
+        //GameManager.Instance.itemContainer.Add(gameObject, this);
+        gameObject.GetComponent<InteractableObject>().label = item.ItemName + "\n" + item.Description;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateItem(Item itemObj)
     {
-        
-    }
-
-    public enum ItemType
-    {
-        ForcePotion = 1,DefencePotion = 2, DamagePotion = 3
+        Debug.Log("UpdateItem");
+        item = itemObj;
+        itemId = item.Id;
+        spriteRenderer.sprite = item.Sprite;
+        //GameManager.Instance.itemContainer.Add(gameObject, this);
+        gameObject.GetComponent<InteractableObject>().label = item.ItemName + "\n" + item.Description;
     }
 
     public void Destroy(GameObject gameObject)

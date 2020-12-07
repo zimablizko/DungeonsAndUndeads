@@ -36,8 +36,7 @@ public class Health : MonoBehaviour
 
     public void TakeHit(int damage)
     {
-        health -= damage;
-        Debug.Log("TakeHit "+damage);
+        health = Math.Max(health - damage, 0);
         if (particleHitPrefab)
         {
             GameObject particle;
@@ -47,12 +46,8 @@ public class Health : MonoBehaviour
             particle.GetComponent<ParticleSystem>().Emit(20);
         }
 
-        if (health <= 0)
-        {
-            if (destroyer == null)
-                Destroy(gameObject);
-            else destroyer.Destroy(gameObject);
-        }
+        //health = Math.Max(health, 0);
+
     }
 
     public void AddHealth(int bonusHealth)
