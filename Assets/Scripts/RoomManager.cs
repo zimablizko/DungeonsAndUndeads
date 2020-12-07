@@ -8,14 +8,13 @@ public class RoomManager : MonoBehaviour
 {
     public static RoomManager Instance { get; private set; }
 
-    public Player player;
-    public GameObject canvas;
-
+    public Player player; //from UI
+    public GameObject canvas; //from UI
+    public GameObject sceneChanger;
     public GameWorld gameWorld;
     private void Awake()
     {
         Instance = this;
-        player = Player.Instance;
         canvas = GameObject.Find("Canvas");
         
         gameWorld = new GameWorld();
@@ -55,4 +54,6 @@ public class RoomManager : MonoBehaviour
         canvas.GetComponent<FadeScreen>().FadeOut();
         player.transform.position = GameObject.FindWithTag("StartPosition").transform.position;
     }
+    
+    
 }

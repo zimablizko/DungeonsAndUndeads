@@ -134,25 +134,26 @@ MonoBehaviour:
   initHealth: 100
   jumpForce: 10
   actionSpeed: 1.5
-  speed: 0.7
+  speed: 1.2
   recoveryTime: 0.5
+  isInvulnerable: 0
   isDisabled: 0
   isJumping: 0
   isCooldown: 0
   isMovable: 1
   isOnRight: 1
   meleeDamage: 5
-  meleeAttackRate: 2
+  meleeAttackRate: 0.5
   attackRange: 0.7
   attackPoint: {fileID: 8154349215697250810}
-  rangeDamage: 5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  rangeDamage: 10
   rangeAttackRate: 2
   projectile: {fileID: 5796579777991650769, guid: af087f50c13a46e49b0ebe311ecb1a39,
     type: 3}
   projectileSpawnPoint: {fileID: 4441157910195341306}
-  enemyLayers:
-    serializedVersion: 2
-    m_Bits: 256
   buffReceiver: {fileID: 5756176767319236328}
 --- !u!114 &9077202710569315185
 MonoBehaviour:

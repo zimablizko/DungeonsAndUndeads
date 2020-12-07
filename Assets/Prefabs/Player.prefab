@@ -79,12 +79,12 @@ MonoBehaviour:
   m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 6f509db100000000
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0
+  m_ShadowIntensity: 0.423
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
@@ -270,31 +270,32 @@ MonoBehaviour:
   animator: {fileID: 6734329519874619905}
   health: {fileID: 6734329519874619914}
   groundDetection: {fileID: 8642664011546922334}
-  projectile: {fileID: 2693843641337227844, guid: ea639461508883843b408eecf08eb865,
-    type: 3}
-  initHp: 100
-  damage: 25
-  attackRange: 0.6
+  initHealth: 100
   jumpForce: 10
-  speed: 4
   actionSpeed: 0.5
-  attackSpeed: 2
+  speed: 4
   recoveryTime: 0.5
   isDisabled: 0
   isJumping: 0
   isCooldown: 0
   isMovable: 1
   isOnRight: 1
+  meleeDamage: 25
+  meleeAttackRate: 1
+  attackRange: 0.6
   attackPoint: {fileID: 1218144689}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
+  rangeDamage: 15
+  rangeAttackRate: 0.75
+  projectile: {fileID: 2693843641337227844, guid: ea639461508883843b408eecf08eb865,
+    type: 3}
   projectileSpawnPoint: {fileID: 2845009631570285656}
-  buffReciever: {fileID: 3871963988194823960}
+  buffReceiver: {fileID: 3871963988194823960}
   energy: {fileID: 9082428082187647419}
   reviveTime: 2.5
   interactionRange: 1.5
-  isCheatMode: 1
   interactableObject: {fileID: 0}
 --- !u!114 &6734329519874619914
 MonoBehaviour:
@@ -356,7 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinsCount: 0
   coinsText: {fileID: 0}
-  buffReciever: {fileID: 3871963988194823960}
+  buffReceiver: {fileID: 3871963988194823960}
 --- !u!114 &3871963988194823960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +408,7 @@ GameObject:
   m_Layer: 8
   m_Name: ProjectileSpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -419,7 +420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8023006394477375743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.167, y: 0.343, z: 0}
+  m_LocalPosition: {x: 0.69, y: 0.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2557588550893069371}

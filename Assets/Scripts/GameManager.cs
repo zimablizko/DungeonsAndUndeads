@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,7 +29,8 @@ public class GameManager : MonoBehaviour
     public Player player;
     public Checkpoint currentCheckpoint;
     public GameObject canvas;
-
+    [Header("FLAGS")] 
+    [SerializeField] private bool isCheatMode;
     private void Awake()
     {
         Instance = this;
@@ -44,15 +46,37 @@ public class GameManager : MonoBehaviour
         interactableObjectsContainer = new Dictionary<GameObject, InteractableObject>();
         checkpointsContainer = new Dictionary<GameObject, Checkpoint>();
         actorsContainer = new Dictionary<GameObject, Actor>();
-        canvas.transform.Find("Inventory").Find("ItemGrid").GetComponent<UIInventoryController>().Init(); //TODO: плохой поиск
+        canvas.transform.GetComponentInChildren<UIInventoryController>().Init();
     }
 
     public void Start()
     {
         player.gameObject.SetActive(false);
-        StartCoroutine(TestStartGame());
+        StartGame();
+    }
+    public void StartGame()
+    {
+        StartCoroutine(StartGameCoroutine());
     }
 
+    private IEnumerator StartGameCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        RoomManager.Instance.LoadFirstScene();
+    }
+    
+    public void AddActor(GameObject gameObject, Actor actor)
+    {
+        actorsContainer.Add(gameObject, actor);
+        CheckSceneChangerActive();
+    }
+    
+    public void RemoveActor(GameObject gameObject)
+    {
+        actorsContainer.Remove(gameObject);
+        CheckSceneChangerActive();
+    }
+    
     /**
     * Выключаем старый чекпоинт и добавляем его в интерактивные объекты
     * С новым наоборот
@@ -92,9 +116,17 @@ public class GameManager : MonoBehaviour
         canvas.GetComponent<FadeScreen>().FadeOut();
     }
 
-    private IEnumerator TestStartGame()
+
+    
+    public void CheckSceneChangerActive()
     {
-        yield return new WaitForSeconds(1f);
-        RoomManager.Instance.LoadFirstScene();
+        if (actorsContainer.Count(g => g.Key.CompareTag("Enemy")) > 0)
+        {
+            RoomManager.Instance.sceneChanger.SetActive(false);
+        }
+        else
+        {
+            RoomManager.Instance.sceneChanger.SetActive(true);
+        }
     }
 }

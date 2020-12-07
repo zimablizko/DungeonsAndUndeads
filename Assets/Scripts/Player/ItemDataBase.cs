@@ -53,7 +53,7 @@ public class ItemDataBase : ScriptableObject
 
     public Item GetItemOfID(int id)
     {
-        return items.Find(item => item.Id == id);
+        return items.FindAll(item => item.ItemType == ItemType.TRINKET).Find(item => item.Id == id);
     }    
     
     public Item GetRandomItem()

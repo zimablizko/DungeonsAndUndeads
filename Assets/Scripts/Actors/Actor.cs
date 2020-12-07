@@ -39,6 +39,14 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     
     [SerializeField] private float recoveryTime = 0.5f;
     [Header("FLAGS")]
+    [SerializeField] private bool isInvulnerable;
+
+    public bool IsInvulnerable
+    {
+        get => isInvulnerable;
+        set => isInvulnerable = value;
+    }    
+    
     [SerializeField] private bool isDisabled;
 
     public bool IsDisabled
@@ -57,6 +65,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     [SerializeField] private float meleeAttackRate = 2f;
     [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private Transform attackPoint;
+    [SerializeField] private LayerMask enemyLayers;
     private float nextMeleeAttackTime;
     private float meleeDamageBonus;
     private float meleeDamageMultiplier;
@@ -84,11 +93,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     }
     
     [Header("OTHER")]
-    
-    [SerializeField] private LayerMask enemyLayers;
-    
     private Vector3 direction;
-    
     private float jumpForceBonus;
     private float healthBonus;
     
@@ -117,7 +122,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     public void ActorInit()
     {
         //rigidbody.bodyType = RigidbodyType2D.Dynamic;
-        GameManager.Instance.actorsContainer.Add(gameObject, this);
+        GameManager.Instance.AddActor(gameObject, this);
         animator.SetBool("IsDead", false);
         isDisabled = false;
         isMovable = true;
@@ -301,6 +306,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     
     public void TakeHit(int hitDamage)
     {
+        if (IsInvulnerable) return;
         Health.TakeHit(hitDamage);
         GFXManager.Instance.CreateFloatingText(transform, hitDamage.ToString());
         IsDisabled = true;
@@ -308,7 +314,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         {
             animator.SetTrigger("TakeDamage");
             StartCoroutine(RecoverTimeout());
-        } else{
+        } else {
             Destroy(gameObject);
         }
     }
@@ -331,6 +337,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         rigidbody.bodyType = RigidbodyType2D.Static;
         GetComponent<Collider2D>().enabled = false;
         this.enabled = false;
+        GameManager.Instance.RemoveActor(gameObject);
     }
 
     private void OnDrawGizmosSelected()

@@ -12,23 +12,22 @@ public class Player : Actor
 
     #endregion
 
-    [Header("PLAYER COMPONENTS")] 
-    private UICharacterController uiCharacterController;
-    [SerializeField] private Energy energy;
+    [Header("TTTTTT")] private UICharacterController uiCharacterController;
+
+    [Header("PLAYER COMPONENTS")] [SerializeField]
+    private Energy energy;
 
     public Energy Energy
     {
         get { return energy; }
     }
 
-    [Header("VARIABLES")] 
-    [SerializeField] private float reviveTime = 2.5f;
+    [Header("VARIABLES")] [SerializeField] private float reviveTime = 2.5f;
     [SerializeField] private float interactionRange;
-    [Header("FLAGS")] 
-    [SerializeField] private bool isCheatMode;
 
-    [Header("OTHER")] 
-    [SerializeField] private GameObject interactableObject;
+
+    [Header("INTERACTION")] [SerializeField]
+    private GameObject interactableObject;
 
     private void Awake()
     {
@@ -48,7 +47,7 @@ public class Player : Actor
             Interact();
 #endif
     }
-    
+
     public void InitUIController(UICharacterController uiCharacterController)
     {
         this.uiCharacterController = uiCharacterController;
@@ -64,7 +63,7 @@ public class Player : Actor
             base.CheckShoot();
         }
     }
-    
+
     //висит на финальном фрейме дальней атаки
     public void SpendEnergy()
     {
@@ -77,46 +76,17 @@ public class Player : Actor
     {
         if (interactableObject)
         {
-            Debug.Log("Interact with "+interactableObject.name);
+            Debug.Log("Interact with " + interactableObject.name);
             if (GameManager.Instance.checkpointsContainer.ContainsKey(interactableObject))
             {
                 GameManager.Instance.SetCheckpoint(GameManager.Instance.checkpointsContainer[interactableObject]);
-            }
-
-            if (interactableObject.GetComponent<SceneChanger>())
-            {
+            } else if (interactableObject.GetComponent<SceneChanger>()) {
                 RoomManager.Instance.ChangeScene();
-            }            
-            if (interactableObject.GetComponent<ItemComponent>())
-            {
+            } else if (interactableObject.GetComponent<ItemComponent>()) {
                 GameManager.Instance.playerInventory.AddItem(interactableObject.GetComponent<ItemComponent>().Item);
                 GameObject.Destroy(interactableObject);
             }
-
             ResetInteract();
-        }
-    }
-
-    #endregion
-
-
-    private IEnumerator ReviveTimeout()
-    {
-        yield return new WaitForSeconds(reviveTime);
-        Revive();
-    }
-
-    public void Revive()
-    {
-        if (GameManager.Instance.currentCheckpoint)
-        {
-            Health.SetFullHealth();
-            ActorInit();
-            transform.position = GameManager.Instance.currentCheckpoint.transform.position;
-        }
-        else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -143,6 +113,30 @@ public class Player : Actor
         interactableObject = null;
         uiCharacterController.CloseLabel();
     }
+
+    #endregion
+
+
+    private IEnumerator ReviveTimeout()
+    {
+        yield return new WaitForSeconds(reviveTime);
+        Revive();
+    }
+
+    public void Revive()
+    {
+        if (GameManager.Instance.currentCheckpoint)
+        {
+            Health.SetFullHealth();
+            ActorInit();
+            transform.position = GameManager.Instance.currentCheckpoint.transform.position;
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
 
     #region DEBUG
 

@@ -7,15 +7,20 @@ public enum ItemType
     TRINKET = 1,QUEST = 2
 }
 
+public enum ItemRarity
+{
+    COMMON, RARE, EPIC, LEGENDARY
+}
+
 [Serializable]
 public class Item
 {
-
     [SerializeField] private int id;
     [SerializeField] private string itemName;
     [SerializeField] private string description;
     [SerializeField] private List<Buff> buffList;
     [SerializeField] private ItemType itemType;
+    [SerializeField] private ItemRarity itemRarity;
     //[SerializeField] private BuffType buffType;
     //[SerializeField] private float value;
     [SerializeField] private Sprite sprite;
@@ -54,5 +59,11 @@ public class Item
     {
         get => itemType;
         set => itemType = value;
+    }
+
+    public ItemRarity ItemRarity
+    {
+        get => itemRarity;
+        set => itemRarity = value;
     }
 }

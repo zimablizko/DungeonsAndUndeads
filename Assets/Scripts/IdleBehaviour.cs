@@ -21,10 +21,15 @@ public class IdleBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (!player.GetComponent<Player>().isActiveAndEnabled)
+        {
+            animator.Play("Idle");
+            return;
+        }
         enemy.LookAtPlayer();
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
-            animator.SetTrigger("StartAttackMelee");
+            enemy.MeleeAttack();
         }
         else
         {

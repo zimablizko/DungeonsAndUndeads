@@ -21,7 +21,7 @@ public class Menu : MonoBehaviour
   }*/
   public void OnClickPlay()
   {
-    SceneManager.LoadScene("level_1");
+    SceneManager.LoadScene("gameplay");
     Time.timeScale = 1;
   }
 
