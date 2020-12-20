@@ -26,9 +26,10 @@ public class IdleBehaviour : StateMachineBehaviour
             animator.Play("Idle");
             return;
         }
-        enemy.LookAtPlayer();
+        
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
+            //enemy.LookAtPlayer();
             enemy.MeleeAttack();
         }
         else

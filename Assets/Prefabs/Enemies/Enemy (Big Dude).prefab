@@ -202,7 +202,7 @@ MonoBehaviour:
   isCooldown: 0
   isMovable: 1
   isOnRight: 1
-  meleeDamage: 5
+  meleeDamage: 15
   meleeAttackRate: 2
   attackRange: 1.22
   attackPoint: {fileID: 609282530020942074}

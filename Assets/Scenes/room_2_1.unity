@@ -417,6 +417,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (Skeleton)
       objectReference: {fileID: 0}
+    - target: {fileID: 5028227649249040445, guid: 3caa4e20130dea244936fd418c2663fe,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028227649249040445, guid: 3caa4e20130dea244936fd418c2663fe,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028227649249040445, guid: 3caa4e20130dea244936fd418c2663fe,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6144362889417107433, guid: 3caa4e20130dea244936fd418c2663fe,
         type: 3}
       propertyPath: m_RootOrder
@@ -425,7 +440,7 @@ PrefabInstance:
     - target: {fileID: 6144362889417107433, guid: 3caa4e20130dea244936fd418c2663fe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.298559
+      value: 5.34
       objectReference: {fileID: 0}
     - target: {fileID: 6144362889417107433, guid: 3caa4e20130dea244936fd418c2663fe,
         type: 3}
@@ -8436,6 +8451,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2775999645615611591, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775999645615611591, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775999645615611591, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_RootOrder
@@ -8444,7 +8474,7 @@ PrefabInstance:
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.27
+      value: 3.311441
       objectReference: {fileID: 0}
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}

@@ -59,6 +59,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     [SerializeField] private bool isCooldown;
     [SerializeField] private bool isMovable = true;
     [SerializeField] public bool isOnRight = true;
+    [SerializeField] public bool isBlocking;
     
     [Header("MELEE COMBAT")]
     [SerializeField] private int meleeDamage = 5;
@@ -238,7 +239,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
             if (GameManager.Instance.actorsContainer.ContainsKey(enemy.gameObject))
             {
                 var actor = GameManager.Instance.actorsContainer[enemy.gameObject];
-                actor.TakeHit(MeleeDamage);
+                actor.TakeHit(MeleeDamage, gameObject);
             }
         }
     }
@@ -304,18 +305,30 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
     #endregion
     
-    public void TakeHit(int hitDamage)
+    public void TakeHit(int hitDamage, GameObject damageSource = null)
     {
         if (IsInvulnerable) return;
+        var damageBlocked = false;
+        if (damageSource && isBlocking)
+            if ((!isOnRight && damageSource.transform.position.x < gameObject.transform.position.x) || 
+                (isOnRight && damageSource.transform.position.x > gameObject.transform.position.x))
+            {
+                damageBlocked = true;
+                hitDamage = 1;
+            }
+
         Health.TakeHit(hitDamage);
         GFXManager.Instance.CreateFloatingText(transform, hitDamage.ToString());
         IsDisabled = true;
-        if (health.CurrentHealth > 0f)
+        if (health.CurrentHealth <= 0f)
+        {
+            Destroy(gameObject);
+            return;
+        } 
+        if (!damageBlocked)
         {
             animator.SetTrigger("TakeDamage");
             StartCoroutine(RecoverTimeout());
-        } else {
-            Destroy(gameObject);
         }
     }
 
