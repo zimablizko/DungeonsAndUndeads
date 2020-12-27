@@ -11,7 +11,7 @@ public class ItemGenerator : MonoBehaviour
         Item item = GameManager.Instance.itemDataDataBase.GetRandomItem();
         Debug.Log(item.ItemName);
         var trinket = Instantiate(itemPrefab, trinketPosition.transform);
-        itemPrefab.GetComponentInChildren<ItemComponent>().UpdateItem(item);
+        trinket.GetComponentInChildren<ItemComponent>().UpdateItem(item);
     }
 
     // Update is called once per frame

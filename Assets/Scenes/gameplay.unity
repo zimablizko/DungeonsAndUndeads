@@ -140,6 +140,21 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1873793327}
+    - target: {fileID: 2557588550893069368, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.46875
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557588550893069368, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.59375
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557588550893069368, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2557588550893069371, guid: 216a16aef2891b946b665d455ba7f8aa,
         type: 3}
       propertyPath: m_RootOrder

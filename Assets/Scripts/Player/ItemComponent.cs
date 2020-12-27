@@ -33,6 +33,7 @@ public class ItemComponent : MonoBehaviour, IObjectDestroyer
     public void UpdateItem(Item itemObj)
     {
         Debug.Log("UpdateItem");
+        Debug.Log(itemObj.ItemName);
         item = itemObj;
         itemId = item.Id;
         spriteRenderer.sprite = item.Sprite;
