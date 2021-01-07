@@ -44,7 +44,9 @@ public class Player : Actor
         if (Input.GetButtonDown("AttackMelee"))
             MeleeAttack();
         if (Input.GetButtonDown("Use"))
-            Interact();
+            Interact();        
+        if (Input.GetButtonDown("Escape"))
+            GameObject.Find("Canvas").GetComponent<GameMenu>().OnClickPause();
 #endif
     }
 
