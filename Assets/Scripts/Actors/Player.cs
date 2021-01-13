@@ -44,7 +44,9 @@ public class Player : Actor
         if (Input.GetButtonDown("AttackMelee"))
             MeleeAttack();
         if (Input.GetButtonDown("Use"))
-            Interact();        
+            Interact();          
+        if (Input.GetButtonDown("Dash"))
+            StartDash();        
         if (Input.GetButtonDown("Escape"))
             GameObject.Find("Canvas").GetComponent<GameMenu>().OnClickPause();
 #endif
@@ -90,6 +92,32 @@ public class Player : Actor
             }
             ResetInteract();
         }
+    }
+    
+    private void StartDash()
+    {
+        foreach (GameObject actor in GameManager.Instance.actorsContainer.Keys)
+        {
+            if (actor.CompareTag("Enemy")) {
+                actor.GetComponent<Collider2D>().isTrigger = true;
+            }
+        }
+
+        IsInvulnerable = true;
+        isMovable = false;
+        animator.SetTrigger("StartDash");
+    }
+
+    public void FinishDash()
+    {
+        foreach (GameObject actor in GameManager.Instance.actorsContainer.Keys)
+        {
+            if (actor.CompareTag("Enemy")) {
+                actor.GetComponent<Collider2D>().isTrigger = false;
+            }
+        }
+        IsInvulnerable = false;
+        isMovable = true;
     }
 
     private void OnTriggerEnter2D(Collider2D col)

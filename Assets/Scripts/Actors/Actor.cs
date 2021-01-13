@@ -57,7 +57,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
     [SerializeField] private bool isJumping;
     [SerializeField] private bool isCooldown;
-    [SerializeField] private bool isMovable = true;
+    [SerializeField] public bool isMovable = true;
     [SerializeField] public bool isOnRight = true;
     [SerializeField] public bool isBlocking;
     
@@ -341,6 +341,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     public void RecoverFromHit()
     {
         IsDisabled = false;
+        isMovable = true;
     }
 
     public void Destroy(GameObject gameObject)
