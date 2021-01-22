@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c81bad90746ce46af7157cd06ae268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 5.8
+  attackRange: 10
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -309,8 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c7a4426fb06cc4ab01717bcd5caac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRange: 6
-  attackRange: 5.8
+  aggroRange: 10
+  attackRange: 10
 --- !u!1101 &1434412754931680337
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

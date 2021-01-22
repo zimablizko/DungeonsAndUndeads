@@ -220,6 +220,16 @@ PrefabInstance:
       propertyPath: coinsText
       value: 
       objectReference: {fileID: 1552256461}
+    - target: {fileID: 6734329519874619914, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6734329519874619914, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 216a16aef2891b946b665d455ba7f8aa, type: 3}
 --- !u!114 &511620271 stripped

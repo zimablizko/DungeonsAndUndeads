@@ -48,7 +48,7 @@ public class Player : Actor
         if (Input.GetButtonDown("Dash"))
             StartDash();        
         if (Input.GetButtonDown("Escape"))
-            GameObject.Find("Canvas").GetComponent<GameMenu>().OnClickPause();
+            GameObject.Find("Canvas").GetComponent<PauseMenu>().OnClickPause();
 #endif
     }
 
@@ -89,6 +89,8 @@ public class Player : Actor
             } else if (interactableObject.GetComponent<ItemComponent>()) {
                 GameManager.Instance.playerInventory.AddItem(interactableObject.GetComponent<ItemComponent>().Item);
                 GameObject.Destroy(interactableObject);
+            } else if (interactableObject.GetComponent<RestorationPoint>()) {
+                interactableObject.GetComponent<RestorationPoint>().Restore();
             }
             ResetInteract();
         }

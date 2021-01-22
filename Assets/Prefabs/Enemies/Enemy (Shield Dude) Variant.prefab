@@ -12,6 +12,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2213868131061624203, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: health
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2213868131061624203, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2775999645615611591, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_Sprite
@@ -27,6 +37,16 @@ PrefabInstance:
         type: 3}
       propertyPath: attackRange
       value: 0.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: meleeDamage
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: meleeAttackRate
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
@@ -46,12 +66,12 @@ PrefabInstance:
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.1137476
+      value: 4.891288
       objectReference: {fileID: 0}
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.610039
+      value: -5.596209
       objectReference: {fileID: 0}
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
@@ -98,10 +118,40 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b95f812688e42c34b8bfd732456b0cb3, type: 2}
+    - target: {fileID: 7501455936907674168, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501455936907674171, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501455936907674171, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501455936907674171, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501455936907674173, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7501455936907674173, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1410039413
+      objectReference: {fileID: 0}
     - target: {fileID: 8520413692901618819, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_Name
-      value: Enemy (Shield Dude)
+      value: Enemy (Shield Dude) Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62ec723f70bfac443a9ce055df330872, type: 3}

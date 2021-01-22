@@ -204,7 +204,7 @@ MonoBehaviour:
   isOnRight: 1
   isBlocking: 0
   meleeDamage: 5
-  meleeAttackRate: 2
+  meleeAttackRate: 1.8
   attackRange: 0.7
   attackPoint: {fileID: 1327330403745312512}
   enemyLayers:
@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2625cd7dbc665d468b38073a5d346b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
-  maxHealth: 50
+  health: 60
+  maxHealth: 60
   particleHitPrefab: {fileID: 0}
   particleEmitShiftY: 0
 --- !u!114 &54583891051390487
@@ -326,7 +326,7 @@ PrefabInstance:
     - target: {fileID: 2358755394301281801, guid: 2f0957f43fb0b8e4291af109ef4f25a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.05
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 2358755394301281801, guid: 2f0957f43fb0b8e4291af109ef4f25a5,
         type: 3}

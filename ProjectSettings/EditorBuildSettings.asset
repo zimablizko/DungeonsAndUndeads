@@ -32,4 +32,37 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/room_treasure.unity
     guid: e169fa84e72b79748b98ef4c6c27aec9
+  - enabled: 1
+    path: Assets/Scenes/room_restoration.unity
+    guid: ea432db07ef339c428478d9cfd527426
+  - enabled: 1
+    path: Assets/Scenes/room_7_1.unity
+    guid: f35e5bd344fb5db42af10e4161f25d11
+  - enabled: 1
+    path: Assets/Scenes/room_4_1.unity
+    guid: 9ec33ee590d84dd449e2cb9279a2a2a6
+  - enabled: 1
+    path: Assets/Scenes/room_5_1.unity
+    guid: 24d67806fc9b8504ea1b3bb55d67c81f
+  - enabled: 1
+    path: Assets/Scenes/room_2_2.unity
+    guid: 57fc526729726e1418e1b0af4456d616
+  - enabled: 1
+    path: Assets/Scenes/room_8_2.unity
+    guid: 12f1915ab8c1fa6458e4ea14e4e1a426
+  - enabled: 1
+    path: Assets/Scenes/room_4_3.unity
+    guid: 1ae1e2daa34498a4e8da6c45327434df
+  - enabled: 1
+    path: Assets/Scenes/room_8_1.unity
+    guid: 4eb1429b3a0c4034b84a58473bf8543a
+  - enabled: 1
+    path: Assets/Scenes/room_7_2.unity
+    guid: 44eabc4cd6ba6e740ac587108ee63f45
+  - enabled: 1
+    path: Assets/Scenes/room_5_2.unity
+    guid: 850e579c190a5394bbd64053331604b3
+  - enabled: 1
+    path: Assets/Scenes/room_4_2.unity
+    guid: 3e87abdc50a12104984b9b000895b2be
   m_configObjects: {}

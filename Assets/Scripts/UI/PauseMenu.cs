@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class GameMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject soundButtonText;
 
@@ -18,8 +19,18 @@ public class GameMenu : MonoBehaviour
 
     public void OnClickPause()
     {
-        Time.timeScale = 0;
-        menu.SetActive(true);
+        if (!pauseMenu.activeInHierarchy)
+        {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(GameObject.Find("Resume_btn"));
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
     }
     
     public void OnClickInventory()
@@ -46,7 +57,7 @@ public class GameMenu : MonoBehaviour
     public void OnClickResume()
     {
         Time.timeScale = 1;
-        menu.SetActive(false);
+        pauseMenu.SetActive(false);
     }
 
     public void OnClickGoToMenu()

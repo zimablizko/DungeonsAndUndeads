@@ -4,21 +4,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Menu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
   /*[SerializeField] private InputField nameField;
 
-  private void Start()
-  {
-    if (PlayerPrefs.HasKey("Player_Name"))
-      nameField.text = PlayerPrefs.GetString("Player_Name");
-  }
+  
 
   public void OnEndEditName()
   {
     PlayerPrefs.SetString("Player_Name",nameField.text);
   }*/
+  private void Start()
+  {
+    OnBegin();
+  }
+  
+  public void OnBegin()
+  {
+    EventSystem.current.SetSelectedGameObject(null);
+    EventSystem.current.SetSelectedGameObject(GameObject.Find("Start_btn"));
+  }  
+  
+  public void OnClickStart()
+  {
+    EventSystem.current.SetSelectedGameObject(null);
+    EventSystem.current.SetSelectedGameObject(GameObject.Find("Play_btn"));
+  }  
+  
   public void OnClickPlay()
   {
     SceneManager.LoadScene("gameplay");
