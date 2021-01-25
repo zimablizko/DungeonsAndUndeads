@@ -16,7 +16,12 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     {
         get { return health; }
     }
+    [SerializeField] private Energy energy;
 
+    public Energy Energy
+    {
+        get { return energy; }
+    }
     [SerializeField] private GroundDetection groundDetection;
 
     [Header("VARIABLES")] 
@@ -38,6 +43,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     }
     
     [SerializeField] private float recoveryTime = 0.5f;
+    [SerializeField] private float resistTime = 3f;
     [Header("FLAGS")]
     [SerializeField] private bool isInvulnerable;
 
@@ -60,6 +66,8 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     [SerializeField] public bool isMovable = true;
     [SerializeField] public bool isOnRight = true;
     [SerializeField] public bool isBlocking;
+    [SerializeField] public bool isResisting;
+    [SerializeField] public bool isPlayer;
     
     [Header("MELEE COMBAT")]
     [SerializeField] private int meleeDamage = 5;
@@ -79,6 +87,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     [Header("RANGE COMBAT")]
     [SerializeField] private int rangeDamage = 5;
     [SerializeField] private float rangeAttackRate = 2f;
+    [SerializeField] private int rangeEnergyCost = 0;
     [SerializeField] private Projectile projectile;
     private float nextRangeAttackTime;
     private float rangeDamageBonus;
@@ -240,6 +249,8 @@ public class Actor : MonoBehaviour, IObjectDestroyer
             {
                 var actor = GameManager.Instance.actorsContainer[enemy.gameObject];
                 actor.TakeHit(MeleeDamage, gameObject);
+                if (isPlayer)
+                    Energy.AddEnergy(1);
             }
         }
     }
@@ -258,6 +269,8 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     {
         if (Time.time >= nextRangeAttackTime && !isJumping)
         {
+            if (Energy && Energy.CurrentEnergy<rangeEnergyCost)
+                return;
             isMovable = false;
             animator.SetTrigger("StartAttackRange");
             nextRangeAttackTime = Time.time + 1f / rangeAttackRate;
@@ -266,6 +279,8 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
     void Shoot()
     {
+        if (Energy)
+            Energy.AddEnergy(-rangeEnergyCost);
         currentProjectile = GetProjectileFromPool();
         currentProjectile.SetImpulse(isOnRight ? Vector2.right : Vector2.left, this, RangeDamage);
         StartCoroutine(StartCooldown());
@@ -325,10 +340,12 @@ public class Actor : MonoBehaviour, IObjectDestroyer
             Destroy(gameObject);
             return;
         } 
-        if (!damageBlocked)
+        if (!damageBlocked && !isResisting)
         {
             animator.SetTrigger("TakeDamage");
             StartCoroutine(RecoverTimeout());
+            isResisting = true;
+            StartCoroutine(ResistTimeout());
         }
     }
 
@@ -336,6 +353,11 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     {
         yield return new WaitForSeconds(recoveryTime);
         RecoverFromHit();
+    }    
+    private IEnumerator ResistTimeout()
+    {
+        yield return new WaitForSeconds(resistTime);
+        isResisting = false;
     }
 
     public void RecoverFromHit()

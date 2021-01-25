@@ -190,6 +190,7 @@ MonoBehaviour:
   rigidbody: {fileID: 5526126259760516171}
   animator: {fileID: 5133857428947178546}
   health: {fileID: 335018540640969329}
+  energy: {fileID: 0}
   groundDetection: {fileID: 3569220931129704563}
   initHealth: 100
   jumpForce: 10
@@ -203,6 +204,8 @@ MonoBehaviour:
   isMovable: 1
   isOnRight: 1
   isBlocking: 0
+  isResisting: 1
+  isPlayer: 0
   meleeDamage: 20
   meleeAttackRate: 0.7
   attackRange: 1.22

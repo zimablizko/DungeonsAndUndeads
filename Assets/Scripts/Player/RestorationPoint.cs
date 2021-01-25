@@ -21,6 +21,7 @@ public class RestorationPoint : MonoBehaviour
     {
         animator.SetBool("isEnabled", true);
         Player.Instance.Health.SetFullHealth();
+        Player.Instance.Energy.SetFullEnergy();
     }    
 
 }

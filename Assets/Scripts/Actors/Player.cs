@@ -12,22 +12,20 @@ public class Player : Actor
 
     #endregion
 
-    [Header("TTTTTT")] private UICharacterController uiCharacterController;
+    [Header("TTTTTT")] 
+    private UICharacterController uiCharacterController;
 
-    [Header("PLAYER COMPONENTS")] [SerializeField]
-    private Energy energy;
+    [Header("PLAYER COMPONENTS")] 
+    
 
-    public Energy Energy
-    {
-        get { return energy; }
-    }
-
-    [Header("VARIABLES")] [SerializeField] private float reviveTime = 2.5f;
+    [Header("VARIABLES")] 
+    [SerializeField] private float reviveTime = 2.5f;
     [SerializeField] private float interactionRange;
+    [SerializeField] private int dashEnergyCost = 5;
 
 
-    [Header("INTERACTION")] [SerializeField]
-    private GameObject interactableObject;
+    [Header("INTERACTION")] 
+    [SerializeField] private GameObject interactableObject;
 
     private void Awake()
     {
@@ -60,20 +58,6 @@ public class Player : Actor
         this.uiCharacterController.Hit.onClick.AddListener(MeleeAttack);
     }
 
-    public void CheckShoot()
-    {
-        if (Energy.CurrentEnergy >= 5)
-        {
-            base.CheckShoot();
-        }
-    }
-
-    //висит на финальном фрейме дальней атаки
-    public void SpendEnergy()
-    {
-        Energy.AddEnergy(-5);
-    }
-
     #region INTERACTION
 
     private void Interact()
@@ -98,16 +82,21 @@ public class Player : Actor
     
     private void StartDash()
     {
-        foreach (GameObject actor in GameManager.Instance.actorsContainer.Keys)
+        if (Energy.CurrentEnergy >= dashEnergyCost)
         {
-            if (actor.CompareTag("Enemy")) {
-                actor.GetComponent<Collider2D>().isTrigger = true;
+            foreach (GameObject actor in GameManager.Instance.actorsContainer.Keys)
+            {
+                if (actor.CompareTag("Enemy"))
+                {
+                    actor.GetComponent<Collider2D>().isTrigger = true;
+                }
             }
-        }
 
-        IsInvulnerable = true;
-        isMovable = false;
-        animator.SetTrigger("StartDash");
+            Energy.AddEnergy(-dashEnergyCost);
+            IsInvulnerable = true;
+            isMovable = false;
+            animator.SetTrigger("StartDash");
+        }
     }
 
     public void FinishDash()

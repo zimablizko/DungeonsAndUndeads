@@ -15,12 +15,13 @@ MonoBehaviour:
   items:
   - id: 1
     itemName: Diamond Sword
-    description: +10 Atack Damage
+    description: +10 Attack Damage
     buffList:
     - type: 0
       additiveBonus: 10
       multipleBonus: 0
     itemType: 1
+    itemRarity: 0
     sprite: {fileID: 319968439374914050, guid: b21ff76c92a7c6341aa4affabd2e7d01, type: 3}
   - id: 2
     itemName: Carrot
@@ -30,16 +31,17 @@ MonoBehaviour:
       additiveBonus: 20
       multipleBonus: 0
     itemType: 1
+    itemRarity: 0
     sprite: {fileID: 2675871245208072475, guid: b0ffdb5edceaf1b43a3fd7b98e0ee726,
       type: 3}
   currentItem:
-    id: 2
-    itemName: Carrot
-    description: +20 HP
+    id: 1
+    itemName: Diamond Sword
+    description: +10 Attack Damage
     buffList:
-    - type: 2
-      additiveBonus: 20
+    - type: 0
+      additiveBonus: 10
       multipleBonus: 0
     itemType: 1
-    sprite: {fileID: 2675871245208072475, guid: b0ffdb5edceaf1b43a3fd7b98e0ee726,
-      type: 3}
+    itemRarity: 0
+    sprite: {fileID: 319968439374914050, guid: b21ff76c92a7c6341aa4affabd2e7d01, type: 3}

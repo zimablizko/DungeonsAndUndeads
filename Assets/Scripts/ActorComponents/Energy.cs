@@ -51,4 +51,9 @@ public class Energy : MonoBehaviour
         maxEnergy = bonusEnergy;
         energy = bonusEnergy;
     }
+    
+    public void SetFullEnergy()
+    {
+        energy = maxEnergy;
+    }
 }

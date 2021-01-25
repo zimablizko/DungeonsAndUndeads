@@ -5,7 +5,6 @@ using UnityEngine;
 public class Room
 {
     private string name;
-
     public string Name => name;
 
     public Room(string name)
