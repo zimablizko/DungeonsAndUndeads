@@ -19,6 +19,7 @@ public class MainMenu : MonoBehaviour
   private void Start()
   {
     OnBegin();
+    AudioManager.Instance.PlayTheme("MenuTheme");
   }
   
   public void OnBegin()

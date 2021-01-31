@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour, IObjectDestroyer
     [SerializeField] private float lifeTime;
     [SerializeField] private TriggerDamage triggerDamage;
     [SerializeField] private int damage;
+    [SerializeField] private string soundHitName;
     private Actor actor;
     
     public float Force
@@ -20,7 +21,7 @@ public class Projectile : MonoBehaviour, IObjectDestroyer
     public void SetImpulse(Vector2 direction, Actor actor, int damage)
     {
         this.actor = actor;
-        triggerDamage.Init(this,damage);
+        triggerDamage.Init(this,damage,soundHitName);
         rigidbody.AddForce(direction*force, ForceMode2D.Impulse);
         transform.rotation = Quaternion.Euler(0,direction.x < 0 ? 180 : 0,0);
         StartCoroutine(StartLife());

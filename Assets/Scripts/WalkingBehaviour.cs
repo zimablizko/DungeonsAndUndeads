@@ -39,6 +39,6 @@ public class WalkingBehaviour : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("StartAttackMelee");
+        //animator.ResetTrigger("StartAttackMelee");
     }
 }

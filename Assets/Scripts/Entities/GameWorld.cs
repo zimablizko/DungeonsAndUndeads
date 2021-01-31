@@ -42,6 +42,7 @@ public class GameWorld
 
     private void GenerateGameWorld()
     {
+        //AddRoom(new Room("room_10"));
         AddRoom(new Room("room_0"));
         AddRoom(new Room(new [] {"room_1_1", "room_1_2"}));
         AddRoom(new Room(new [] {"room_2_1", "room_2_2"}));

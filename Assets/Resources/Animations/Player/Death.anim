@@ -46,7 +46,7 @@ AnimationClip:
     - time: 1.4285715
       value: {fileID: 4403242937475075093, guid: 45d28dd8f906511479fa4a945efa6fb1,
         type: 3}
-    - time: 5
+    - time: 3.4285715
       value: {fileID: 4403242937475075093, guid: 45d28dd8f906511479fa4a945efa6fb1,
         type: 3}
     attribute: m_Sprite
@@ -83,7 +83,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 5.142857
+    m_StopTime: 3.5714285
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -102,4 +102,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 3.4285715
+    functionName: OnDefeat
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

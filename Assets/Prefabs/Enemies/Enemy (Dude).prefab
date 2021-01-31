@@ -190,12 +190,14 @@ MonoBehaviour:
   rigidbody: {fileID: 6246416054094169009}
   animator: {fileID: 6710403997939456968}
   health: {fileID: 2213868131061624203}
+  energy: {fileID: 0}
   groundDetection: {fileID: 3141101607854231433}
   initHealth: 100
   jumpForce: 10
   actionSpeed: 0.5
   speed: 1
   recoveryTime: 0.5
+  resistTime: 3
   isInvulnerable: 0
   isDisabled: 0
   isJumping: 0
@@ -203,6 +205,8 @@ MonoBehaviour:
   isMovable: 1
   isOnRight: 1
   isBlocking: 0
+  isResisting: 0
+  isPlayer: 0
   meleeDamage: 5
   meleeAttackRate: 1.8
   attackRange: 0.7
@@ -210,10 +214,15 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
-  rangeDamage: 5
-  rangeAttackRate: 2
+  rangeDamage: 0
+  rangeAttackRate: 0
+  rangeEnergyCost: 0
   projectile: {fileID: 0}
   projectileSpawnPoint: {fileID: 6837492305810817280}
+  soundTakeHit: MonsterTakeHit
+  soundDeath: MonsterDeath
+  soundMeleeAttack: SwordSwing
+  soundRangeAttack: 
   buffReceiver: {fileID: 3216558414484559890}
 --- !u!114 &2213868131061624203
 MonoBehaviour:

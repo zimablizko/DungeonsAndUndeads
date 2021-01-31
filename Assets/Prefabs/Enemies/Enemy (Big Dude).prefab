@@ -197,6 +197,7 @@ MonoBehaviour:
   actionSpeed: 0.5
   speed: 1
   recoveryTime: 0.5
+  resistTime: 3
   isInvulnerable: 0
   isDisabled: 0
   isJumping: 0
@@ -215,8 +216,12 @@ MonoBehaviour:
     m_Bits: 256
   rangeDamage: 5
   rangeAttackRate: 2
+  rangeEnergyCost: 0
   projectile: {fileID: 0}
   projectileSpawnPoint: {fileID: 4971028155570409210}
+  soundTakeHit: MonsterTakeHit
+  soundDeath: 
+  soundMeleeAttack: 1
   buffReceiver: {fileID: 3944174804357748712}
 --- !u!114 &335018540640969329
 MonoBehaviour:

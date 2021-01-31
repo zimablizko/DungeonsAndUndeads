@@ -72,6 +72,7 @@ public class Player : Actor
                 RoomManager.Instance.ChangeScene();
             } else if (interactableObject.GetComponent<ItemComponent>()) {
                 GameManager.Instance.playerInventory.AddItem(interactableObject.GetComponent<ItemComponent>().Item);
+                AudioManager.Instance.Play("PickupTrinket");
                 GameObject.Destroy(interactableObject);
             } else if (interactableObject.GetComponent<RestorationPoint>()) {
                 interactableObject.GetComponent<RestorationPoint>().Restore();
@@ -137,6 +138,11 @@ public class Player : Actor
 
     #endregion
 
+    //Вызывается в последнем фрейме анимации смерти
+    public void OnDefeat()
+    {
+        GameObject.Find("Canvas").GetComponent<PauseMenu>().OnDefeatMenu();
+    }
 
     private IEnumerator ReviveTimeout()
     {

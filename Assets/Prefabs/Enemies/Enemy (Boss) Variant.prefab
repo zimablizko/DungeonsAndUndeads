@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6002893484775765341
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 307593863664369529, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.2859557
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.6740074
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4366609531718340925, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b2c069322d2d044fb2f35f12e5a55b7,
+        type: 3}
+    - target: {fileID: 4460412084019813460, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: soundMeleeAttack
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791671419798633337, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy (Boss) Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a8a478234e858b247815466aa4317391, type: 3}

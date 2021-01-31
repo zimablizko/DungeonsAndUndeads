@@ -9,12 +9,15 @@ using UnityEngine.EventSystems;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject defeatMenu;
+    [SerializeField] private GameObject victoryMenu;
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject soundButtonText;
 
     private void Start()
     {
         UpdateSoundText();
+        AudioManager.Instance.PlayTheme("MainTheme");
     }
 
     public void OnClickPause()
@@ -23,7 +26,7 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(null);
+            //EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(GameObject.Find("Resume_btn"));
         }
         else
@@ -76,5 +79,19 @@ public class PauseMenu : MonoBehaviour
             soundButtonText.GetComponent<Text>().text = "Sound: On";
         else
             soundButtonText.GetComponent<Text>().text = "Sound: Off";
+    }
+
+    public void OnDefeatMenu()
+    {
+        defeatMenu.SetActive(true);
+        Time.timeScale = 0;
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("MainMenu_btn"));
+    }    
+    
+    public void OnVictoryMenu()
+    {
+        victoryMenu.SetActive(true);
+        Time.timeScale = 0;
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("MainMenu_btn"));
     }
 }

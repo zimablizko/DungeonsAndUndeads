@@ -101,6 +101,13 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         get => (int)((rangeDamage + (int) rangeDamageBonus) * (1 + rangeDamageMultiplier));
         set => rangeDamage = value;
     }
+
+    [Header("SOUNDS")] 
+    [SerializeField] private string soundTakeHit;
+    [SerializeField] private string soundDeath;
+    [SerializeField] private string soundMeleeAttack;
+    [SerializeField] private string soundRangeCast;
+    [SerializeField] private string soundRangeRelease;
     
     [Header("OTHER")]
     private Vector3 direction;
@@ -242,6 +249,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     void AttackImpact()
     {
         //meleeAttackRegion.SetActive(true);
+        AudioManager.Instance.Play(soundMeleeAttack);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -274,6 +282,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
             isMovable = false;
             animator.SetTrigger("StartAttackRange");
             nextRangeAttackTime = Time.time + 1f / rangeAttackRate;
+            AudioManager.Instance.Play(soundRangeCast);
         }
     }
 
@@ -283,6 +292,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
             Energy.AddEnergy(-rangeEnergyCost);
         currentProjectile = GetProjectileFromPool();
         currentProjectile.SetImpulse(isOnRight ? Vector2.right : Vector2.left, this, RangeDamage);
+        AudioManager.Instance.Play(soundRangeRelease);
         StartCoroutine(StartCooldown());
         isMovable = true;
     }
@@ -334,9 +344,11 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
         Health.TakeHit(hitDamage);
         GFXManager.Instance.CreateFloatingText(transform, hitDamage.ToString());
+        AudioManager.Instance.Play(soundTakeHit); //TODO: добавить поле с названием саунда и играть его
         IsDisabled = true;
         if (health.CurrentHealth <= 0f)
         {
+            AudioManager.Instance.Play(soundDeath);
             Destroy(gameObject);
             return;
         } 

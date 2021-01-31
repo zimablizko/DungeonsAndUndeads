@@ -96,8 +96,6 @@ public class GameManager : MonoBehaviour
         player.ResetInteract();
     }
     
-    
-
     public void StartDeathScreen()
     {
         StartCoroutine(DeathScreen());
@@ -117,16 +115,24 @@ public class GameManager : MonoBehaviour
     }
 
 
-    
+    //Если перехода нет, значит это последний босс-уровень
     public void CheckSceneChangerActive()
     {
-        if (actorsContainer.Count(g => g.Key.CompareTag("Enemy")) > 0)
+        if (RoomManager.Instance.sceneChanger)
         {
-            RoomManager.Instance.sceneChanger.SetActive(false);
+            if (actorsContainer.Count(g => g.Key.CompareTag("Enemy")) > 0)
+            {
+                RoomManager.Instance.sceneChanger.SetActive(false);
+            }
+            else
+            {
+                RoomManager.Instance.sceneChanger.SetActive(true);
+            }
         }
         else
         {
-            RoomManager.Instance.sceneChanger.SetActive(true);
+            if (actorsContainer.Count(g => g.Key.CompareTag("Enemy")) == 0)
+                GameObject.Find("Canvas").GetComponent<PauseMenu>().OnVictoryMenu();
         }
     }
 }

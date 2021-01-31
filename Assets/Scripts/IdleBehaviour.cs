@@ -30,7 +30,10 @@ public class IdleBehaviour : StateMachineBehaviour
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
             //enemy.LookAtPlayer();
-            enemy.MeleeAttack();
+            if (enemy.RangeDamage > 0)
+                enemy.CheckShoot();
+            else
+                enemy.MeleeAttack();
         }
         else
         {
@@ -42,7 +45,7 @@ public class IdleBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger("StartWalking");
-        animator.ResetTrigger("StartAttackMelee");
+        //animator.ResetTrigger("StartAttackMelee");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

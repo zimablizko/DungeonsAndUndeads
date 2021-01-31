@@ -48,6 +48,11 @@ PrefabInstance:
       propertyPath: meleeAttackRate
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: soundMeleeAttack
+      value: SwordSwing
+      objectReference: {fileID: 0}
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_RootOrder

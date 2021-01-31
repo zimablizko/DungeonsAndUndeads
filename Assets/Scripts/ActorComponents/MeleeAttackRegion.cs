@@ -17,7 +17,7 @@ public class MeleeAttackRegion : MonoBehaviour, IObjectDestroyer
     private void OnEnable()
     {
 
-        triggerDamage.Init(this,triggerDamage.Damage);
+        triggerDamage.Init(this,triggerDamage.Damage,null);
         StartCoroutine(StartLife());
     }
 
