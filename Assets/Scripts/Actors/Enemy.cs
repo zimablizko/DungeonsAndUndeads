@@ -3,7 +3,11 @@
 public class Enemy : Actor
 {
     private GameObject player;
-
+    [Header("BOSS")]
+    [SerializeField] private Transform waveSpawnPoint;
+    [SerializeField] private Projectile waveProjectile;
+    [SerializeField] private int waveDamage = 5;
+    [SerializeField] private IceJail jailPrefab;
     void Start()
     {
         base.Start();
@@ -34,5 +38,23 @@ public class Enemy : Actor
             isOnRight = false;
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+    }
+    
+    void ShootWave()
+    {
+        var currentProjectile = Instantiate(waveProjectile, waveSpawnPoint.position, Quaternion.identity);
+        currentProjectile.SetImpulse(isOnRight ? Vector2.right : Vector2.left, this, waveDamage);
+        //AudioManager.Instance.Play(soundRangeRelease);
+        //StartCoroutine(StartCooldown());
+        //isMovable = true;
+    }
+    
+    public void CastJail()
+    {
+        var currentProjectile = Instantiate(jailPrefab, new Vector3(player.transform.position.x, -5.65f, player.transform.position.z), Quaternion.identity);
+        //currentProjectile.SetImpulse(isOnRight ? Vector2.right : Vector2.left, this, waveDamage);
+        //AudioManager.Instance.Play(soundRangeRelease);
+        //StartCoroutine(StartCooldown());
+        //isMovable = true;
     }
 }

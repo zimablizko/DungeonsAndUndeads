@@ -395,6 +395,26 @@ PrefabInstance:
       propertyPath: soundRangeAttack
       value: FireballStart
       objectReference: {fileID: 0}
+    - target: {fileID: 2557588550893069368, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557588550893069368, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557588550893069368, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2557588550893069368, guid: 216a16aef2891b946b665d455ba7f8aa,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2557588550893069371, guid: 216a16aef2891b946b665d455ba7f8aa,
         type: 3}
       propertyPath: m_RootOrder
@@ -1695,6 +1715,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -3.351676
       objectReference: {fileID: 0}
+    - target: {fileID: 3502905234323957420, guid: c0148ce3fc6b9aa4988d02cf80e26f14,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.807269
+      objectReference: {fileID: 0}
     - target: {fileID: 3502905234323957421, guid: c0148ce3fc6b9aa4988d02cf80e26f14,
         type: 3}
       propertyPath: m_Follow
@@ -1709,6 +1734,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.07514334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3502905234378563739, guid: c0148ce3fc6b9aa4988d02cf80e26f14,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.807269
       objectReference: {fileID: 0}
     - target: {fileID: 3502905234378563742, guid: c0148ce3fc6b9aa4988d02cf80e26f14,
         type: 3}
@@ -1790,6 +1820,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7736970833828165584, guid: c5336a2c85fc578498a22e6af988fcc7,
+        type: 3}
+      propertyPath: sounds.Array.data[1].name
+      value: MainTheme1
+      objectReference: {fileID: 0}
     - target: {fileID: 7736970833828165585, guid: c5336a2c85fc578498a22e6af988fcc7,
         type: 3}
       propertyPath: m_RootOrder

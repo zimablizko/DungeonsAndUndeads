@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkingBehaviour : StateMachineBehaviour
+public class BossWalkingBehaviour : StateMachineBehaviour
 {
     private float speed;
     public float attackRange = 1.5f;
@@ -30,14 +30,6 @@ public class WalkingBehaviour : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, rb.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
-        
-       if (Vector2.Distance(player.position, rb.position) <= attackRange)
-        {
-            if (enemy.RangeDamage > 0)
-                enemy.CheckShoot();
-            else
-                enemy.MeleeAttack();
-        }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

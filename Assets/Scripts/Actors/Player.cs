@@ -35,16 +35,20 @@ public class Player : Actor
     private void Update()
     {
 #if UNITY_EDITOR
-        if (Input.GetButtonDown("Jump"))
-            Jump();
-        if (Input.GetButtonDown("AttackRange"))
-            CheckShoot();
-        if (Input.GetButtonDown("AttackMelee"))
-            MeleeAttack();
-        if (Input.GetButtonDown("Use"))
-            Interact();          
-        if (Input.GetButtonDown("Dash"))
-            StartDash();        
+        if (!IsDisabled)
+        {
+            if (Input.GetButtonDown("Jump"))
+                Jump();
+            if (Input.GetButtonDown("AttackRange"))
+                CheckShoot();
+            if (Input.GetButtonDown("AttackMelee"))
+                MeleeAttack();
+            if (Input.GetButtonDown("Use"))
+                Interact();
+            if (Input.GetButtonDown("Dash"))
+                StartDash();
+        }
+
         if (Input.GetButtonDown("Escape"))
             GameObject.Find("Canvas").GetComponent<PauseMenu>().OnClickPause();
 #endif
@@ -58,6 +62,23 @@ public class Player : Actor
         this.uiCharacterController.Hit.onClick.AddListener(MeleeAttack);
     }
 
+    public void TakeIceJail(int hitDamage)
+    {
+        if (!IsInvulnerable)
+            Health.TakeHit(hitDamage);
+        rigidbody.velocity = Vector2.zero;
+        GFXManager.Instance.CreateFloatingText(transform, hitDamage.ToString());
+        IsDisabled = true;
+        isMovable = false;
+        animator.SetTrigger("TakeIceJail");
+    }
+    
+    private void RecoverIceJail()
+    {
+        IsDisabled = false;
+        isMovable = true;
+    }    
+    
     #region INTERACTION
 
     private void Interact()
@@ -81,6 +102,32 @@ public class Player : Actor
         }
     }
     
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (GameManager.Instance.interactableObjectsContainer.ContainsKey(col.gameObject))
+        {
+            GameObject obj = GameManager.Instance.interactableObjectsContainer[col.gameObject].gameObject;
+            interactableObject = obj;
+            uiCharacterController.SetLabel(obj.GetComponent<InteractableObject>().label);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col)
+    {
+        if (GameManager.Instance.interactableObjectsContainer.ContainsKey(col.gameObject))
+        {
+            ResetInteract();
+        }
+    }
+
+    public void ResetInteract()
+    {
+        interactableObject = null;
+        uiCharacterController.CloseLabel();
+    }
+
+    #endregion
+
     private void StartDash()
     {
         if (Energy.CurrentEnergy >= dashEnergyCost)
@@ -111,32 +158,6 @@ public class Player : Actor
         IsInvulnerable = false;
         isMovable = true;
     }
-
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (GameManager.Instance.interactableObjectsContainer.ContainsKey(col.gameObject))
-        {
-            GameObject obj = GameManager.Instance.interactableObjectsContainer[col.gameObject].gameObject;
-            interactableObject = obj;
-            uiCharacterController.SetLabel(obj.GetComponent<InteractableObject>().label);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D col)
-    {
-        if (GameManager.Instance.interactableObjectsContainer.ContainsKey(col.gameObject))
-        {
-            ResetInteract();
-        }
-    }
-
-    public void ResetInteract()
-    {
-        interactableObject = null;
-        uiCharacterController.CloseLabel();
-    }
-
-    #endregion
 
     //Вызывается в последнем фрейме анимации смерти
     public void OnDefeat()

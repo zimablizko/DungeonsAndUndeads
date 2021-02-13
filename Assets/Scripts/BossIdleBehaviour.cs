@@ -1,15 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class IdleBehaviour : StateMachineBehaviour
+public class BossIdleBehaviour : StateMachineBehaviour
 {
-    public float aggroRange = 6f;
     public float attackRange = 1.8f;
+    public bool enrageMode = false;
+    public int shootCounter = 0;
     private Transform player;
     private Rigidbody2D rb;
 
     private Enemy enemy;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -21,29 +25,42 @@ public class IdleBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (enemy.Health.CurrentHealth <= (enemy.Health.MaxHealth / 2))
+        {
+            if (!enrageMode)
+            {
+                enrageMode = true;
+                animator.SetTrigger("StartSplit");
+            }
+        }
+
         if (!player.GetComponent<Player>().isActiveAndEnabled)
         {
             animator.Play("Idle");
             return;
         }
-        
-        if (Vector2.Distance(player.position, rb.position) <= attackRange)
-        {
-            enemy.LookAtPlayer();
-            if (enemy.RangeDamage > 0)
-                enemy.CheckShoot();
-            else
-                enemy.MeleeAttack();
-        }
-        else
+
+        enemy.LookAtPlayer();
+        if (Vector2.Distance(player.position, rb.position) > attackRange)
         {
             animator.SetTrigger("StartWalking");
         }
     }
 
-  
+
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        var rnd = Random.Range(0, 2);
+        Debug.Log(rnd);
+        if (rnd != 1)
+        {
+            enemy.CheckShoot();
+        }
+        else
+        {
+            animator.SetTrigger("StartCast");
+        }
+        
         animator.ResetTrigger("StartWalking");
         //animator.ResetTrigger("StartAttackMelee");
     }

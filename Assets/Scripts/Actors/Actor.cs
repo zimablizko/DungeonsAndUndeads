@@ -68,7 +68,13 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     [SerializeField] public bool isBlocking;
     [SerializeField] public bool isResisting;
     [SerializeField] public bool isPlayer;
-    
+
+    public bool IsPlayer
+    {
+        get => isPlayer;
+        set => isPlayer = value;
+    }
+
     [Header("MELEE COMBAT")]
     [SerializeField] private int meleeDamage = 5;
     [SerializeField] private float meleeAttackRate = 2f;
@@ -223,7 +229,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     }
     public void Jump()
     {
-        if (!isCooldown && groundDetection.IsGrounded)
+        if (!isCooldown && groundDetection.IsGrounded && !IsDisabled)
         {
             rigidbody.AddForce(Vector2.up * (jumpForce + jumpForceBonus), ForceMode2D.Impulse);
             animator.SetTrigger("StartJump");
@@ -296,6 +302,18 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         StartCoroutine(StartCooldown());
         isMovable = true;
     }
+    
+    void ShootToPlayer()
+    {
+        if (Energy)
+            Energy.AddEnergy(-rangeEnergyCost);
+        currentProjectile = GetProjectileFromPool();
+        Transform target = Player.Instance.transform;
+        currentProjectile.SetImpulse(Vector3.Normalize(target.position - transform.position) - new Vector3(0,0.07f,0), this, RangeDamage);
+        AudioManager.Instance.Play(soundRangeRelease);
+        StartCoroutine(StartCooldown());
+        isMovable = true;
+    }
 
     private IEnumerator StartCooldown()
     {
@@ -343,8 +361,9 @@ public class Actor : MonoBehaviour, IObjectDestroyer
             }
 
         Health.TakeHit(hitDamage);
+        rigidbody.velocity = Vector2.zero;
         GFXManager.Instance.CreateFloatingText(transform, hitDamage.ToString());
-        AudioManager.Instance.Play(soundTakeHit); //TODO: добавить поле с названием саунда и играть его
+        AudioManager.Instance.Play(soundTakeHit);
         IsDisabled = true;
         if (health.CurrentHealth <= 0f)
         {

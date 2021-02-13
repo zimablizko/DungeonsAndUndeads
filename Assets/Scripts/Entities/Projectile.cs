@@ -20,8 +20,10 @@ public class Projectile : MonoBehaviour, IObjectDestroyer
 
     public void SetImpulse(Vector2 direction, Actor actor, int damage)
     {
-        this.actor = actor;
+        if (actor)
+            this.actor = actor;
         triggerDamage.Init(this,damage,soundHitName);
+        Debug.Log(direction);
         rigidbody.AddForce(direction*force, ForceMode2D.Impulse);
         transform.rotation = Quaternion.Euler(0,direction.x < 0 ? 180 : 0,0);
         StartCoroutine(StartLife());
@@ -33,8 +35,13 @@ public class Projectile : MonoBehaviour, IObjectDestroyer
         Destroy(gameObject);
     }
 
-    public void Destroy(GameObject gameObject)
+    public void Destroy(GameObject gameeObject)
     {
-        actor.ReturnProjectileToPool(this);
+        if (actor)
+            actor.ReturnProjectileToPool(this);
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
