@@ -23,8 +23,7 @@ public class ItemComponent : MonoBehaviour, IObjectDestroyer
 
     public void UpdateItemById(int itemId)
     {
-        Debug.Log("UpdateItemById");
-        item = GameManager.Instance.itemDataDataBase.GetItemOfID(itemId);
+        item = GameManager.Instance.itemDataBase.GetItemOfID(itemId);
         spriteRenderer.sprite = item.Sprite;
         //GameManager.Instance.itemContainer.Add(gameObject, this);
         gameObject.GetComponent<InteractableObject>().label = item.ItemName + "\n" + item.Description;
@@ -32,8 +31,6 @@ public class ItemComponent : MonoBehaviour, IObjectDestroyer
 
     public void UpdateItem(Item itemObj)
     {
-        Debug.Log("UpdateItem");
-        Debug.Log(itemObj.ItemName);
         item = itemObj;
         itemId = item.Id;
         spriteRenderer.sprite = item.Sprite;

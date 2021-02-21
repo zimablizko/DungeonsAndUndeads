@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,21 +23,28 @@ public class GameManager : MonoBehaviour
     public Dictionary<GameObject, InteractableObject> interactableObjectsContainer;
     public Dictionary<GameObject, Checkpoint> checkpointsContainer;
     public Dictionary<GameObject, Actor> actorsContainer;
+    public int maxDifficulty;
+    public int difficulty;
     public bool isSoundEnabled;
     public bool isDebugMode;
-    public ItemDataBase itemDataDataBase;
+    public ItemDataBase itemDataBase;
     public PlayerInventory playerInventory;
     public Player player;
     public Checkpoint currentCheckpoint;
     public GameObject canvas;
-    [Header("FLAGS")] 
-    [SerializeField] private bool isCheatMode;
+    [Header("FLAGS")] [SerializeField] private bool isCheatMode;
+
     private void Awake()
     {
         Instance = this;
         canvas = GameObject.Find("Canvas");
         if (PlayerPrefs.HasKey("Sound_Enabled"))
             isSoundEnabled = Convert.ToBoolean(PlayerPrefs.GetInt("Sound_Enabled"));
+        if (PlayerPrefs.HasKey("Difficulty"))
+            difficulty = PlayerPrefs.GetInt("Difficulty");
+        if (PlayerPrefs.HasKey("Max_Difficulty"))
+            maxDifficulty = PlayerPrefs.GetInt("Max_Difficulty");
+        GameObject.Find("Difficulty").GetComponent<Text>().text = difficulty.ToString();
         healthContainer = new Dictionary<GameObject, Health>();
         energyContainer = new Dictionary<GameObject, Energy>();
         coinContainer = new Dictionary<GameObject, Coin>();
@@ -52,8 +60,10 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         player.gameObject.SetActive(false);
+        itemDataBase.InitDatabase(); //сброс флагов найденных предметов
         StartGame();
     }
+
     public void StartGame()
     {
         StartCoroutine(StartGameCoroutine());
@@ -64,19 +74,20 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         RoomManager.Instance.LoadFirstScene();
     }
-    
+
     public void AddActor(GameObject gameObject, Actor actor)
     {
         actorsContainer.Add(gameObject, actor);
+        Debug.Log(actor.name);
         CheckSceneChangerActive();
     }
-    
+
     public void RemoveActor(GameObject gameObject)
     {
         actorsContainer.Remove(gameObject);
         CheckSceneChangerActive();
     }
-    
+
     /**
     * Выключаем старый чекпоинт и добавляем его в интерактивные объекты
     * С новым наоборот
@@ -95,12 +106,12 @@ public class GameManager : MonoBehaviour
         interactableObjectsContainer.Remove(currentCheckpoint.gameObject);
         player.ResetInteract();
     }
-    
+
     public void StartDeathScreen()
     {
         StartCoroutine(DeathScreen());
     }
-    
+
     private IEnumerator DeathScreen()
     {
         yield return new WaitForSeconds(1f);
@@ -118,8 +129,10 @@ public class GameManager : MonoBehaviour
     //Если перехода нет, значит это последний босс-уровень
     public void CheckSceneChangerActive()
     {
+        StopCoroutine("EndVictoryScreen");
         if (RoomManager.Instance.sceneChanger)
         {
+            Debug.Log("YES");
             if (actorsContainer.Count(g => g.Key.CompareTag("Enemy")) > 0)
             {
                 RoomManager.Instance.sceneChanger.SetActive(false);
@@ -131,8 +144,22 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            Debug.Log("NO");
             if (actorsContainer.Count(g => g.Key.CompareTag("Enemy")) == 0)
-                GameObject.Find("Canvas").GetComponent<PauseMenu>().OnVictoryMenu();
+                StartCoroutine("EndVictoryScreen");
         }
     }
+
+    private IEnumerator EndVictoryScreen()
+    {
+        yield return new WaitForSeconds(5f);
+        if (maxDifficulty < 5 && difficulty == maxDifficulty)
+        {
+            PlayerPrefs.SetInt("Max_Difficulty", difficulty + 1);
+            PlayerPrefs.Save();
+        }
+
+        GameObject.Find("Canvas").GetComponent<PauseMenu>().OnVictoryMenu();
+    }
+    
 }

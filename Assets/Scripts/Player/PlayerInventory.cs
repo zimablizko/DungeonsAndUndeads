@@ -56,8 +56,9 @@ public class PlayerInventory : MonoBehaviour
         foreach (var buff in item.BuffList)
         {
             buffReceiver.AddBuff(buff);
+            OnItemlistChanged?.Invoke();
         }
-        OnItemlistChanged?.Invoke();
+        
     }
     
 }

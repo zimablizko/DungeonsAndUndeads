@@ -119,6 +119,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     private Vector3 direction;
     private float jumpForceBonus;
     private float healthBonus;
+    private float healthMultiplier;
     
     public BuffReceiver buffReceiver;
 
@@ -138,7 +139,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
 
         GameManager.Instance.rigidbodyContainer.Add(gameObject, rigidbody);
         buffReceiver.OnBuffsChanged += BuffUpdate;
-        health.Init(this, initHealth + (int) healthBonus);
+        health.Init(this, (int)((initHealth + (int) healthBonus) * (1 + healthMultiplier)));
         ActorInit();
     }
 
@@ -150,28 +151,44 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         isDisabled = false;
         isMovable = true;
         direction = Vector3.zero;
+        if (!isPlayer)
+        {
+            buffReceiver.AddBuff(new Buff(BuffType.Health, 0, 0.1f*(GameManager.Instance.difficulty-1)));
+            buffReceiver.AddBuff(new Buff(BuffType.MeleeDamage, 0, 0.1f*(GameManager.Instance.difficulty-1)));
+            buffReceiver.AddBuff(new Buff(BuffType.RangeDamage, 0, 0.1f*(GameManager.Instance.difficulty-1)));
+        }
     }
 
     private void BuffUpdate()
     {
+        /*
+        meleeDamageBonus = 0;
+        meleeDamageMultiplier = 0;
+        rangeDamageBonus = 0;
+        rangeDamageMultiplier = 0;
+        healthBonus = 0;
+        healthMultiplier = 0;
+        */
+        
         // Melee Damage
-        foreach (var buff in buffReceiver.Buffs.FindAll(buff => buff.type == BuffType.MeleeDamage))
+        foreach (var buff in buffReceiver.Buffs)
         {
-            meleeDamageBonus += buff.additiveBonus != 0 ? buff.additiveBonus : 0;
-            meleeDamageMultiplier += buff.multipleBonus != 0 ? buff.multipleBonus : 0;
+            if (buff.type == BuffType.MeleeDamage)
+            {
+                meleeDamageBonus += buff.additiveBonus;
+                meleeDamageMultiplier += buff.multipleBonus;
+            } else if (buff.type == BuffType.RangeDamage)
+            {
+                rangeDamageBonus += buff.additiveBonus;
+                rangeDamageMultiplier += buff.multipleBonus;
+            } else if (buff.type == BuffType.Health)
+            {
+                healthBonus += buff.additiveBonus;
+                healthMultiplier += buff.multipleBonus;
+                health.SetHealth((int)((initHealth + (int) healthBonus) * (1 + healthMultiplier)));
+            }
         }
-        // Range Damage
-        foreach (var buff in buffReceiver.Buffs.FindAll(buff => buff.type == BuffType.RangeDamage))
-        {
-            rangeDamageBonus += buff.additiveBonus != 0 ? buff.additiveBonus : 0;
-            rangeDamageMultiplier += buff.multipleBonus != 0 ? buff.multipleBonus : 0;
-        }
-        // Health
-        foreach (var buff in buffReceiver.Buffs.FindAll(buff => buff.type == BuffType.Health))
-        {
-            healthBonus += buff.additiveBonus != 0 ? buff.additiveBonus : 0;
-        }
-        health.SetHealth(initHealth + (int) healthBonus);
+        buffReceiver.Buffs.Clear();
     }
 
     void FixedUpdate()
@@ -364,7 +381,6 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         rigidbody.velocity = Vector2.zero;
         GFXManager.Instance.CreateFloatingText(transform, hitDamage.ToString());
         AudioManager.Instance.Play(soundTakeHit);
-        IsDisabled = true;
         if (health.CurrentHealth <= 0f)
         {
             AudioManager.Instance.Play(soundDeath);
@@ -374,6 +390,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
         if (!damageBlocked && !isResisting)
         {
             animator.SetTrigger("TakeDamage");
+            IsDisabled = true;
             StartCoroutine(RecoverTimeout());
             isResisting = true;
             StartCoroutine(ResistTimeout());

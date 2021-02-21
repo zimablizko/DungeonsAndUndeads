@@ -405,24 +405,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &160262073 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3843203140878524581, guid: 3db2d21d501628c43b5fbf99044f2726,
-    type: 3}
-  m_PrefabInstance: {fileID: 1089286786}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &160262075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 160262073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595955e46cb54162b8e1ca5fe3418781, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &798246731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -631,8 +613,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2000254333, guid: 3db2d21d501628c43b5fbf99044f2726, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3db2d21d501628c43b5fbf99044f2726, type: 3}
 --- !u!850595691 &1256193271
 LightingSettings:

@@ -8135,11 +8135,6 @@ PrefabInstance:
       propertyPath: initHealth
       value: 500
       objectReference: {fileID: 0}
-    - target: {fileID: 7973657197794863369, guid: 3deda250fd4118b49973dd0a6b316224,
-        type: 3}
-      propertyPath: rangeDamage
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 9175289278358166452, guid: 3deda250fd4118b49973dd0a6b316224,
         type: 3}
       propertyPath: m_RootOrder

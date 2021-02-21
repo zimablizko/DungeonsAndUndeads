@@ -12,7 +12,7 @@ public class DashBehaviour : StateMachineBehaviour
     {
         player = animator.GetComponent<Player>();
         rb = animator.GetComponent<Rigidbody2D>();
-        speed = player.Speed;
+        speed = player.Speed+2;
     }
 
 

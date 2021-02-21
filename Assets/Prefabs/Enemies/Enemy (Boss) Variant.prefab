@@ -122,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 307593863664369529, guid: a8a478234e858b247815466aa4317391,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.78
+      value: 3.14
       objectReference: {fileID: 0}
     - target: {fileID: 3178313378853416681, guid: a8a478234e858b247815466aa4317391,
         type: 3}
@@ -192,6 +192,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4460412084019813460, guid: a8a478234e858b247815466aa4317391,
         type: 3}
+      propertyPath: initHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460412084019813460, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
       propertyPath: jailPrefab
       value: 
       objectReference: {fileID: 3815390799059537939, guid: 732c05b5f2e86a043b116203b188ffd6,
@@ -206,6 +211,11 @@ PrefabInstance:
         type: 3}
       propertyPath: waveDamage
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460412084019813460, guid: a8a478234e858b247815466aa4317391,
+        type: 3}
+      propertyPath: rangeDamage
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4460412084019813460, guid: a8a478234e858b247815466aa4317391,
         type: 3}

@@ -8,8 +8,7 @@ public class ItemGenerator : MonoBehaviour
     public GameObject trinketPosition;
     void Start()
     {
-        Item item = GameManager.Instance.itemDataDataBase.GetRandomItem();
-        Debug.Log(item.ItemName);
+        Item item = GameManager.Instance.itemDataBase.GetRandomItem();
         var trinket = Instantiate(itemPrefab, trinketPosition.transform);
         trinket.GetComponentInChildren<ItemComponent>().UpdateItem(item);
     }

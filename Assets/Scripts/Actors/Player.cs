@@ -34,7 +34,6 @@ public class Player : Actor
 
     private void Update()
     {
-#if UNITY_EDITOR
         if (!IsDisabled)
         {
             if (Input.GetButtonDown("Jump"))
@@ -48,10 +47,8 @@ public class Player : Actor
             if (Input.GetButtonDown("Dash"))
                 StartDash();
         }
-
         if (Input.GetButtonDown("Escape"))
             GameObject.Find("Canvas").GetComponent<PauseMenu>().OnClickPause();
-#endif
     }
 
     public void InitUIController(UICharacterController uiCharacterController)

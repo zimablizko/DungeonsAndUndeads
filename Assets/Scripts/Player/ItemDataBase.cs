@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-[CreateAssetMenu(fileName = "New Item Database",menuName = "Database/Items")]
+[CreateAssetMenu(fileName = "New Item Database", menuName = "Database/Items")]
 public class ItemDataBase : ScriptableObject
 {
     // Start is called before the first frame update
@@ -14,7 +14,7 @@ public class ItemDataBase : ScriptableObject
 
     public void CreateItem()
     {
-        if(items == null)
+        if (items == null)
             items = new List<Item>();
         Item item = new Item();
         items.Add(item);
@@ -24,7 +24,7 @@ public class ItemDataBase : ScriptableObject
 
     public void DeleteItem()
     {
-        if(items==null || currentItem==null)
+        if (items == null || currentItem == null)
             return;
         items.Remove(currentItem);
         if (items.Count > 0)
@@ -40,28 +40,36 @@ public class ItemDataBase : ScriptableObject
             currentIndex++;
             currentItem = items[currentIndex];
         }
-    }    
-    
+    }
+
     public void PrevItem()
     {
-        if (currentIndex >0)
+        if (currentIndex > 0)
         {
             currentIndex--;
             currentItem = items[currentIndex];
         }
     }
 
+    public void InitDatabase()
+    {
+        foreach (var item in items)
+        {
+            item.IsExcluded = false;
+        }
+    }
+    
     public Item GetItemOfID(int id)
     {
         return items.FindAll(item => item.ItemType == ItemType.TRINKET).Find(item => item.Id == id);
-    }    
-    
+    }
+
     public Item GetRandomItem()
     {
-        Debug.Log(items.Count);
-        var itemId = Random.Range(1, (items.Count + 1));
-        Debug.Log(itemId);
-        return GetItemOfID(itemId);
+        List<Item> availableItems = items.FindAll(item => item.ItemType == ItemType.TRINKET && !item.IsExcluded);
+        var itemNumber = Random.Range(0, availableItems.Count);
+        Item randomItem = availableItems[itemNumber];
+        randomItem.IsExcluded = true;
+        return randomItem;
     }
-    
 }

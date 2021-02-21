@@ -27,6 +27,9 @@ public class IdleBehaviour : StateMachineBehaviour
             return;
         }
         
+        if (enemy.IsDisabled)
+            return;
+        
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
             enemy.LookAtPlayer();

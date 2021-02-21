@@ -23,7 +23,6 @@ public class Projectile : MonoBehaviour, IObjectDestroyer
         if (actor)
             this.actor = actor;
         triggerDamage.Init(this,damage,soundHitName);
-        Debug.Log(direction);
         rigidbody.AddForce(direction*force, ForceMode2D.Impulse);
         transform.rotation = Quaternion.Euler(0,direction.x < 0 ? 180 : 0,0);
         StartCoroutine(StartLife());

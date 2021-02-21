@@ -50,8 +50,7 @@ public class BossIdleBehaviour : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var rnd = Random.Range(0, 2);
-        Debug.Log(rnd);
+        var rnd = Random.Range(0, 3);
         if (rnd != 1)
         {
             enemy.CheckShoot();

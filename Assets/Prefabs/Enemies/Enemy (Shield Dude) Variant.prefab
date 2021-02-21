@@ -35,6 +35,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
+      propertyPath: resistTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
       propertyPath: attackRange
       value: 0.58
       objectReference: {fileID: 0}
@@ -42,6 +47,11 @@ PrefabInstance:
         type: 3}
       propertyPath: meleeDamage
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
+      propertyPath: recoveryTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
@@ -71,12 +81,12 @@ PrefabInstance:
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.891288
+      value: 8.068272
       objectReference: {fileID: 0}
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.596209
+      value: -5.483931
       objectReference: {fileID: 0}
     - target: {fileID: 3892420619203158291, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
@@ -131,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 7501455936907674171, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 7
+      value: 2.46
       objectReference: {fileID: 0}
     - target: {fileID: 7501455936907674171, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}

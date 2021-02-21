@@ -48,15 +48,10 @@ public class UICharacterController : MonoBehaviour
     {
         if (Player.Instance.IsDisabled) return;
         Player.Instance.Stop();
-#if UNITY_EDITOR
         if (Input.GetKey(KeyCode.LeftArrow) || Input.GetAxis("Horizontal") < 0)
-        {
             Player.Instance.MovementUpdate(Vector3.left);
-        }
-
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetAxis("Horizontal") > 0)
             Player.Instance.MovementUpdate(Vector3.right);
-#endif
         if (Left.IsPressed)
             Player.Instance.MovementUpdate(Vector3.left);
         if (Right.IsPressed)

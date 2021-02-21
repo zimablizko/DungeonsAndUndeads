@@ -23,6 +23,7 @@ MonoBehaviour:
     itemType: 1
     itemRarity: 0
     sprite: {fileID: 21300000, guid: 1340089c4ef5b2048888fda2094b421b, type: 3}
+    isExcluded: 1
   - id: 2
     itemName: Carrot
     description: +20 HP
@@ -33,6 +34,32 @@ MonoBehaviour:
     itemType: 1
     itemRarity: 0
     sprite: {fileID: 21300000, guid: 29d4be4e801e71243a6da75ef6476f93, type: 3}
+    isExcluded: 1
+  - id: 3
+    itemName: Torch
+    description: +10 Spell Damage
+    buffList:
+    - type: 1
+      additiveBonus: 10
+      multipleBonus: 0
+    itemType: 1
+    itemRarity: 0
+    sprite: {fileID: 21300000, guid: 75d8c8b37d22b294eb12ed72c3001089, type: 3}
+    isExcluded: 0
+  - id: 4
+    itemName: Mushroom
+    description: +20 Attack Damage, -40 HP
+    buffList:
+    - type: 0
+      additiveBonus: 20
+      multipleBonus: 0
+    - type: 2
+      additiveBonus: -40
+      multipleBonus: 0
+    itemType: 1
+    itemRarity: 0
+    sprite: {fileID: 21300000, guid: 453f60fb19688ae48b733b27c67ee65d, type: 3}
+    isExcluded: 0
   currentItem:
     id: 1
     itemName: Club
@@ -44,3 +71,4 @@ MonoBehaviour:
     itemType: 1
     itemRarity: 0
     sprite: {fileID: 21300000, guid: 1340089c4ef5b2048888fda2094b421b, type: 3}
+    isExcluded: 1

@@ -24,6 +24,7 @@ public class Item
     //[SerializeField] private BuffType buffType;
     //[SerializeField] private float value;
     [SerializeField] private Sprite sprite;
+    [SerializeField] private bool isExcluded;
 
     public Sprite Sprite
     {
@@ -65,5 +66,11 @@ public class Item
     {
         get => itemRarity;
         set => itemRarity = value;
+    }
+
+    public bool IsExcluded
+    {
+        get => isExcluded;
+        set => isExcluded = value;
     }
 }
