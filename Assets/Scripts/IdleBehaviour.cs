@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class IdleBehaviour : StateMachineBehaviour
 {
-    public float aggroRange = 6f;
     public float attackRange = 1.8f;
     private Transform player;
     private Rigidbody2D rb;
@@ -13,7 +12,8 @@ public class IdleBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameManager.Instance.player.transform;
+        
         enemy = animator.GetComponent<Enemy>();
         rb = animator.GetComponent<Rigidbody2D>();
     }
@@ -21,7 +21,10 @@ public class IdleBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!player.GetComponent<Player>().isActiveAndEnabled)
+        if (!player)
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        if (player && !player.GetComponent<Player>().isActiveAndEnabled)
         {
             animator.Play("Idle");
             return;
@@ -29,7 +32,6 @@ public class IdleBehaviour : StateMachineBehaviour
         
         if (enemy.IsDisabled)
             return;
-        
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
             enemy.LookAtPlayer();

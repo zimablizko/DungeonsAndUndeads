@@ -86,42 +86,30 @@ AnimatorController:
   m_Name: Enemy (Dude)
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Speed
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: Direction
-    m_Type: 1
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: StartAttackMelee
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: IsDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: StartWalking
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: TakeDamage
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -362,7 +350,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39c7a4426fb06cc4ab01717bcd5caac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRange: 6
   attackRange: 1.8
 --- !u!1101 &8084374348873417376
 AnimatorStateTransition:
@@ -398,7 +385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c81bad90746ce46af7157cd06ae268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 1.5
+  attackRange: 1.8
 --- !u!1102 &8584477440067927347
 AnimatorState:
   serializedVersion: 5

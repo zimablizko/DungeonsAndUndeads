@@ -222,7 +222,13 @@ MonoBehaviour:
   soundTakeHit: MonsterTakeHit
   soundDeath: 
   soundMeleeAttack: 1
+  soundRangeCast: 
+  soundRangeRelease: 
   buffReceiver: {fileID: 3944174804357748712}
+  waveSpawnPoint: {fileID: 0}
+  waveProjectile: {fileID: 0}
+  waveDamage: 5
+  jailPrefab: {fileID: 0}
 --- !u!114 &335018540640969329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,17 +340,17 @@ PrefabInstance:
     - target: {fileID: 2358755394301281801, guid: 2f0957f43fb0b8e4291af109ef4f25a5,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 2358755394301281801, guid: 2f0957f43fb0b8e4291af109ef4f25a5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.04
+      value: 0.039
       objectReference: {fileID: 0}
     - target: {fileID: 2358755394301281801, guid: 2f0957f43fb0b8e4291af109ef4f25a5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 2.189
       objectReference: {fileID: 0}
     - target: {fileID: 2358755394301281801, guid: 2f0957f43fb0b8e4291af109ef4f25a5,
         type: 3}

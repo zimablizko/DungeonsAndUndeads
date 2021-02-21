@@ -13,7 +13,8 @@ public class WalkingBehaviour : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameManager.Instance.player.transform;
+        Debug.Log("Player "+player.name);
         rb = animator.GetComponent<Rigidbody2D>();
         enemy = animator.GetComponent<Enemy>();
         speed = enemy.Speed;
@@ -21,7 +22,10 @@ public class WalkingBehaviour : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (!player.GetComponent<Player>().isActiveAndEnabled)
+        if (!player)
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        
+        if (player && !player.GetComponent<Player>().isActiveAndEnabled)
         {
             animator.Play("Idle");
             return;
@@ -29,7 +33,6 @@ public class WalkingBehaviour : StateMachineBehaviour
         
         if (enemy.IsDisabled)
             return;
-        
         enemy.LookAtPlayer();
         Vector2 target = new Vector2(player.position.x, rb.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
@@ -37,6 +40,7 @@ public class WalkingBehaviour : StateMachineBehaviour
         
        if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
+            Debug.Log("(WALK)Into distance "+enemy.name);
             if (enemy.RangeDamage > 0)
                 enemy.CheckShoot();
             else

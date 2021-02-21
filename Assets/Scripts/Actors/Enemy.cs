@@ -26,6 +26,8 @@ public class Enemy : Actor
 
     public void LookAtPlayer()
     {
+        if (!player)
+            player = GameManager.Instance.player.gameObject;
         Vector3 direction = player.transform.position - (Vector3) rigidbody.position;
         
         if (direction.x > 0)

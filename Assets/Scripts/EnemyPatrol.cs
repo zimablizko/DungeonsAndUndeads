@@ -11,7 +11,7 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] private GroundDetection groundDetection;
     [SerializeField] private CollisionDamage collisionDamage;
     [SerializeField] private bool isRightDirection;
-    [SerializeField] private bool isAttacking = false;
+    //[SerializeField] private bool isAttacking = false;
     [SerializeField] private float speed = 1f;
 
     [SerializeField] private SpriteRenderer spriteRenderer;

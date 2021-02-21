@@ -46,7 +46,7 @@ public class Console : MonoBehaviour
 
 	void OnDisable ()
 	{
-		Application.RegisterLogCallback(null);
+		Application.logMessageReceived -= HandleLog;
 	}
 
 	void Update ()
