@@ -6,13 +6,16 @@ using UnityEngine.UI;
 public class EnergyBar : MonoBehaviour
 {
     [SerializeField] private Image energy;
-    [SerializeField] private Player player;
     [SerializeField] private float delta;
+    private Text textField;
+    private Player player;
     private float energyValue;
     private float currentEnergy;
 
     private void Start()
     {
+        player = GameManager.Instance.player;
+        textField = transform.Find("Text").GetComponent<Text>();
         energyValue = player.Energy.CurrentEnergy / (float)player.Energy.MaxEnergy;
     }
 
@@ -26,5 +29,6 @@ public class EnergyBar : MonoBehaviour
         if (Mathf.Abs(currentEnergy - energyValue) < delta)
             energyValue = currentEnergy;
         energy.fillAmount = energyValue;
+        textField.text = player.Energy.CurrentEnergy + "/" + player.Energy.MaxEnergy;
     }
 }

@@ -9,7 +9,7 @@ public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private int coinsCount;
     [SerializeField] private Text coinsText;
-    public BuffReciever buffReciever;
+    public BuffReceiver buffReceiver;
     private List<Item> items;
 
     public List<Item> Items
@@ -24,6 +24,7 @@ public class PlayerInventory : MonoBehaviour
         set => coinsCount = value;
     }
 
+    public Action OnItemlistChanged;
     public static PlayerInventory Instance { get; set; }
 
     private void Awake()
@@ -46,15 +47,18 @@ public class PlayerInventory : MonoBehaviour
             coinsText.text = coinsCount.ToString();
             var coin = GameManager.Instance.coinContainer[col.gameObject];
             coin.StartDestroy();
-        }        
-        if (GameManager.Instance.itemContainer.ContainsKey(col.gameObject))
-        {
-            var itemComponent = GameManager.Instance.itemContainer[col.gameObject];
-            items.Add(itemComponent.Item);
-            itemComponent.Destroy(col.gameObject);
         }
     }
 
-
+    public void AddItem(Item item)
+    {
+        items.Add(item);
+        foreach (var buff in item.BuffList)
+        {
+            buffReceiver.AddBuff(buff);
+            OnItemlistChanged?.Invoke();
+        }
+        
+    }
     
 }

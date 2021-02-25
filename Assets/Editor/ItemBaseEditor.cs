@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(ItemBase))]
+[CustomEditor(typeof(ItemDataBase))]
 public class ItemBaseEditor : Editor
 {
-    private ItemBase itemBase;
+    private ItemDataBase itemDataBase;
 
     private void Awake()
     {
-        itemBase = (ItemBase) target;
+        itemDataBase = (ItemDataBase) target;
     }
 
     public override void OnInspectorGUI()
@@ -19,19 +19,19 @@ public class ItemBaseEditor : Editor
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("New Item"))
         {
-            itemBase.CreateItem();
+            itemDataBase.CreateItem();
         }        
         if (GUILayout.Button("Remove Item"))
         {
-            itemBase.DeleteItem();
+            itemDataBase.DeleteItem();
         }  
         if (GUILayout.Button("<="))
         {
-            itemBase.PrevItem();
+            itemDataBase.PrevItem();
         }
         if (GUILayout.Button("=>"))
         {
-            itemBase.NextItem();
+            itemDataBase.NextItem();
         }        
 
         GUILayout.EndHorizontal();
