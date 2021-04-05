@@ -193,7 +193,7 @@ PrefabInstance:
     - target: {fileID: 4460412084019813460, guid: a8a478234e858b247815466aa4317391,
         type: 3}
       propertyPath: initHealth
-      value: 500
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 4460412084019813460, guid: a8a478234e858b247815466aa4317391,
         type: 3}
@@ -281,7 +281,7 @@ PrefabInstance:
     - target: {fileID: 7791671419798633337, guid: a8a478234e858b247815466aa4317391,
         type: 3}
       propertyPath: m_Name
-      value: Enemy (Boss)
+      value: Enemy (Boss) Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8a478234e858b247815466aa4317391, type: 3}

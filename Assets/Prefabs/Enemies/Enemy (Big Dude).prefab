@@ -192,7 +192,7 @@ MonoBehaviour:
   health: {fileID: 335018540640969329}
   energy: {fileID: 0}
   groundDetection: {fileID: 3569220931129704563}
-  initHealth: 100
+  initHealth: 250
   jumpForce: 10
   actionSpeed: 0.5
   speed: 1

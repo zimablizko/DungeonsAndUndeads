@@ -30,6 +30,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
         type: 3}
+      propertyPath: initHealth
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880498277066937262, guid: 62ec723f70bfac443a9ce055df330872,
+        type: 3}
       propertyPath: isBlocking
       value: 1
       objectReference: {fileID: 0}
