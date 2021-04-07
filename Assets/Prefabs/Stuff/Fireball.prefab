@@ -173,6 +173,8 @@ MonoBehaviour:
   triggerDamage: {fileID: 4433123200429368168}
   damage: 0
   soundHitName: FireballHit
+  particleHitPrefab: {fileID: 5975534818739959608, guid: 7259faf0b5b7c944c8c741043c2c9b87,
+    type: 3}
 --- !u!114 &4433123200429368168
 MonoBehaviour:
   m_ObjectHideFlags: 0

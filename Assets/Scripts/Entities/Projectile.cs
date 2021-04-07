@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour, IObjectDestroyer
     [SerializeField] private TriggerDamage triggerDamage;
     [SerializeField] private int damage;
     [SerializeField] private string soundHitName;
+    [SerializeField] private GameObject particleHitPrefab;
     private Actor actor;
     
     public float Force
@@ -36,6 +37,13 @@ public class Projectile : MonoBehaviour, IObjectDestroyer
 
     public void Destroy(GameObject gameeObject)
     {
+        if (particleHitPrefab)
+        {
+            GameObject particle;
+            particle = Instantiate(particleHitPrefab,
+                new Vector3(transform.position.x, transform.position.y, transform.position.z),
+                Quaternion.identity);
+        }
         if (actor)
             actor.ReturnProjectileToPool(this);
         else
