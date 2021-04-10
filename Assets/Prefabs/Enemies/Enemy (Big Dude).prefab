@@ -84,7 +84,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3178313378853416681
 Transform:
   m_ObjectHideFlags: 0
@@ -209,19 +209,20 @@ MonoBehaviour:
   isPlayer: 0
   meleeDamage: 20
   meleeAttackRate: 0.7
-  attackRange: 1.22
+  attackRange: 0.96
   attackPoint: {fileID: 609282530020942074}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
-  rangeDamage: 5
-  rangeAttackRate: 2
+  shakeCameraOnAttack: 1
+  rangeDamage: 0
+  rangeAttackRate: 0
   rangeEnergyCost: 0
   projectile: {fileID: 0}
   projectileSpawnPoint: {fileID: 4971028155570409210}
   soundTakeHit: MonsterTakeHit
-  soundDeath: 
-  soundMeleeAttack: 1
+  soundDeath: MonsterDeath
+  soundMeleeAttack: BigDudeHit
   soundRangeCast: 
   soundRangeRelease: 
   buffReceiver: {fileID: 3944174804357748712}

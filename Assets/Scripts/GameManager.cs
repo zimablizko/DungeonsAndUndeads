@@ -23,16 +23,18 @@ public class GameManager : MonoBehaviour
     public Dictionary<GameObject, InteractableObject> interactableObjectsContainer;
     public Dictionary<GameObject, Checkpoint> checkpointsContainer;
     public Dictionary<GameObject, Actor> actorsContainer;
-    public int maxDifficulty;
-    public int difficulty;
-    public bool isSoundEnabled;
-    public bool isDebugMode;
+    
     public ItemDataBase itemDataBase;
     public PlayerInventory playerInventory;
     public Player player;
     public Checkpoint currentCheckpoint;
     public GameObject canvas;
-    [Header("FLAGS")] [SerializeField] private bool isCheatMode;
+    [Header("DIFFICULTY")]  
+    public int maxDifficulty;
+    public int difficulty;
+    [Header("FLAGS")]  
+    public bool isSoundEnabled;
+    public bool isDebugMode;
 
     private void Awake()
     {

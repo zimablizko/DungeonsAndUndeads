@@ -81,6 +81,7 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     [SerializeField] private float attackRange = 0.5f;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private bool shakeCameraOnAttack;
     private float nextMeleeAttackTime;
     private float meleeDamageBonus;
     private float meleeDamageMultiplier;
@@ -272,6 +273,8 @@ public class Actor : MonoBehaviour, IObjectDestroyer
     void AttackImpact()
     {
         //meleeAttackRegion.SetActive(true);
+        if (shakeCameraOnAttack)
+            GFXManager.Instance.ShakeCamera(0.5f);
         AudioManager.Instance.Play(soundMeleeAttack);
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         foreach (Collider2D enemy in hitEnemies)

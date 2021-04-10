@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: -1739697978092582458}
   - component: {fileID: 1857334926}
   - component: {fileID: 1857334929}
+  - component: {fileID: 1349759751}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -45,14 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ac26f4935b99f469fd0c2abc8c3e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSoundEnabled: 1
-  isDebugMode: 1
-  itemDataDataBase: {fileID: 11400000, guid: 4fb7dcc9ab3c08f43832393dd50db564, type: 2}
+  itemDataBase: {fileID: 11400000, guid: 4fb7dcc9ab3c08f43832393dd50db564, type: 2}
   playerInventory: {fileID: 0}
   player: {fileID: 0}
   currentCheckpoint: {fileID: 0}
   canvas: {fileID: 0}
-  isCheatMode: 0
+  maxDifficulty: 0
+  difficulty: 0
+  isSoundEnabled: 1
+  isDebugMode: 0
 --- !u!114 &1857334926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floatingTextPrefab: {fileID: 309384227523996717, guid: 75e635d9d8b707343ba32e2f5ef5f733,
     type: 3}
+  ShakeDuration: 0.3
+  ShakeAmplitude: 1.2
+  ShakeFrequency: 2
+  virtualCamera: {fileID: 0}
 --- !u!114 &1857334929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,3 +87,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   canvas: {fileID: 0}
+  sceneChanger: {fileID: 0}
+--- !u!114 &1349759751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4406231513799104692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11f0e543043f704b9a2772f182ff0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleKey: 283

@@ -380,7 +380,7 @@ MonoBehaviour:
   actionSpeed: 0.5
   speed: 4
   recoveryTime: 0.5
-  resistTime: 3
+  resistTime: 0
   isInvulnerable: 0
   isDisabled: 0
   isJumping: 0
@@ -392,20 +392,27 @@ MonoBehaviour:
   isPlayer: 1
   meleeDamage: 25
   meleeAttackRate: 1
-  attackRange: 0.6
+  attackRange: 0.7
   attackPoint: {fileID: 1218144689}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
+  shakeCameraOnAttack: 0
   rangeDamage: 15
-  rangeAttackRate: 0.75
+  rangeAttackRate: 1.25
   rangeEnergyCost: 5
   projectile: {fileID: 2693843641337227844, guid: ea639461508883843b408eecf08eb865,
     type: 3}
   projectileSpawnPoint: {fileID: 2845009631570285656}
+  soundTakeHit: 
+  soundDeath: 
+  soundMeleeAttack: SwordSwing
+  soundRangeCast: FireballStart
+  soundRangeRelease: 
   buffReceiver: {fileID: 3871963988194823960}
   reviveTime: 2.5
   interactionRange: 1.5
+  dashEnergyCost: 0
   interactableObject: {fileID: 0}
 --- !u!114 &6734329519874619914
 MonoBehaviour:

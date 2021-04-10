@@ -207,13 +207,14 @@ MonoBehaviour:
   isBlocking: 0
   isResisting: 0
   isPlayer: 0
-  meleeDamage: 5
+  meleeDamage: 8
   meleeAttackRate: 1.8
   attackRange: 0.7
   attackPoint: {fileID: 1327330403745312512}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 256
+  shakeCameraOnAttack: 0
   rangeDamage: 0
   rangeAttackRate: 0
   rangeEnergyCost: 0
@@ -222,8 +223,13 @@ MonoBehaviour:
   soundTakeHit: MonsterTakeHit
   soundDeath: MonsterDeath
   soundMeleeAttack: SwordSwing
-  soundRangeAttack: 
+  soundRangeCast: 
+  soundRangeRelease: 
   buffReceiver: {fileID: 3216558414484559890}
+  waveSpawnPoint: {fileID: 0}
+  waveProjectile: {fileID: 0}
+  waveDamage: 5
+  jailPrefab: {fileID: 0}
 --- !u!114 &2213868131061624203
 MonoBehaviour:
   m_ObjectHideFlags: 0

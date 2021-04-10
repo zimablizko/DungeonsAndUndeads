@@ -49,8 +49,19 @@ public class Player : Actor
             GameObject.Find("Canvas").GetComponent<PauseMenu>().OnClickPause();
         if (Input.GetKey(KeyCode.F3))
         {
-            Health.SetHealth(9999);
-            MeleeDamage = 100;
+            if (GameManager.Instance.isDebugMode)
+            {
+                Health.SetHealth(9999);
+                MeleeDamage = 100;
+            }
+        }
+
+        if (Input.GetKey(KeyCode.F4))
+        {
+            if (GameManager.Instance.isDebugMode)
+            {
+                GFXManager.Instance.ShakeCamera(1f);
+            }
         }
     }
 
